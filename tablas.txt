@@ -1,0 +1,2842 @@
+-- Create table
+create table A2000030
+(
+  cod_cia              NUMBER(2) not null,
+  cod_sector           NUMBER(4) not null,
+  cod_ramo             NUMBER(3) not null,
+  num_poliza           VARCHAR2(13) not null,
+  num_spto             NUMBER not null,
+  num_apli             NUMBER(5) not null,
+  num_spto_apli        NUMBER not null,
+  fec_validez          DATE not null,
+  fec_emision          DATE not null,
+  fec_emision_spto     DATE not null,
+  fec_efec_poliza      DATE not null,
+  fec_vcto_poliza      DATE not null,
+  fec_efec_spto        DATE not null,
+  fec_vcto_spto        DATE not null,
+  tip_duracion         NUMBER(1) not null,
+  num_riesgos          NUMBER(6) not null,
+  cod_mon              NUMBER(2) not null,
+  cod_fracc_pago       NUMBER(5) not null,
+  cant_renovaciones    NUMBER(2),
+  num_renovaciones     NUMBER(4) not null,
+  tip_coaseguro        NUMBER(1) not null,
+  num_presupuesto      VARCHAR2(13),
+  num_poliza_anterior  VARCHAR2(13),
+  num_poliza_cliente   VARCHAR2(13),
+  num_contrato         NUMBER(5),
+  num_poliza_grupo     VARCHAR2(13),
+  num_secu_grupo       NUMBER(6),
+  cod_spto             NUMBER(3),
+  sub_cod_spto         NUMBER(2),
+  cod_tip_spto         VARCHAR2(2),
+  tip_spto             VARCHAR2(2),
+  txt_motivo_spto      VARCHAR2(120),
+  tip_docum            VARCHAR2(3) not null,
+  cod_docum            VARCHAR2(20) not null,
+  cod_cuadro_com       NUMBER(3) not null,
+  cod_agt              NUMBER(5) not null,
+  pct_agt              NUMBER,
+  cod_org              NUMBER(5),
+  cod_asesor           NUMBER(5),
+  cod_nivel1           NUMBER(2) not null,
+  cod_nivel2           NUMBER(3) not null,
+  cod_nivel3           NUMBER(4) not null,
+  cod_compensacion     NUMBER(1) not null,
+  tip_gestor           VARCHAR2(2) not null,
+  cod_gestor           VARCHAR2(13) not null,
+  mca_regulariza       VARCHAR2(1) not null,
+  tip_regulariza       VARCHAR2(1),
+  pct_regulariza       NUMBER,
+  cod_indice           NUMBER(2),
+  anios_max_duracion   NUMBER(4),
+  meses_max_duracion   NUMBER(2),
+  dias_max_duracion    NUMBER(3),
+  cod_agt2             NUMBER(5),
+  pct_agt2             NUMBER,
+  cod_agt3             NUMBER(5),
+  pct_agt3             NUMBER,
+  cod_agt4             NUMBER(5),
+  pct_agt4             NUMBER,
+  duracion_pago_prima  NUMBER(2),
+  cod_envio            VARCHAR2(2),
+  cod_ejecutivo        NUMBER(5),
+  mca_tomadores_alt    VARCHAR2(1) not null,
+  mca_reaseguro_manual VARCHAR2(1) not null,
+  mca_prorrata         VARCHAR2(1) not null,
+  mca_prima_manual     VARCHAR2(1) not null,
+  mca_provisional      VARCHAR2(1) not null,
+  fec_autorizacion     DATE,
+  mca_poliza_anulada   VARCHAR2(1) not null,
+  mca_spto_anulado     VARCHAR2(1) not null,
+  num_spto_anulado     NUMBER,
+  fec_spto_anulado     DATE,
+  mca_spto_tmp         VARCHAR2(1) not null,
+  mca_datos_minimos    VARCHAR2(1),
+  mca_impresion        VARCHAR2(1) not null,
+  mca_exclusivo        VARCHAR2(1) not null,
+  cod_usr              VARCHAR2(8) not null,
+  cod_nivel3_captura   NUMBER(4) not null,
+  fec_actu             DATE not null,
+  mca_reaseguro_marco  VARCHAR2(1) not null,
+  tip_poliza_tr        VARCHAR2(1) not null,
+  num_poliza_siguiente VARCHAR2(13),
+  cod_dst_agt          NUMBER(5),
+  cod_cuadro_coa       VARCHAR2(10)
+)
+tablespace DATOS
+  pctfree 10
+  initrans 1
+  maxtrans 255
+  storage
+  (
+    initial 1453440K
+    next 1M
+    minextents 1
+    maxextents unlimited
+  );
+-- Add comments to the table 
+comment on table A2000030
+  is 'CUBOS - TABLA DE EXPUESTOS AL RIESGO';
+-- Add comments to the columns 
+comment on column A2000030.cod_cia
+  is 'CODIGO DE COMPA?IA';
+comment on column A2000030.cod_sector
+  is 'CODIGO DE SECTOR';
+comment on column A2000030.cod_ramo
+  is 'CODIGO DE RAMO';
+comment on column A2000030.num_poliza
+  is 'NUMERO DE POLIZA';
+comment on column A2000030.num_spto
+  is 'NUMERO DE SUPLEMENTO';
+comment on column A2000030.num_apli
+  is 'NUMERO DE APLICACION (TRANSPORTES)';
+comment on column A2000030.num_spto_apli
+  is 'NUMERO DE SUPLEMENTO APLICACION (TRANSPORTES)';
+comment on column A2000030.fec_validez
+  is 'FECHA DE VALIDEZ DEL RAMO';
+comment on column A2000030.fec_emision
+  is 'FECHA DE EMISION INICIAL DE LA POLIZA';
+comment on column A2000030.fec_emision_spto
+  is 'FECHA DE EMISION DEL SUPLEMENTO';
+comment on column A2000030.fec_efec_poliza
+  is 'FECHA DE EFECTO DE LA POLIZA';
+comment on column A2000030.fec_vcto_poliza
+  is 'FECHA DE VENCIMIENTO DE LA POLIZA';
+comment on column A2000030.fec_efec_spto
+  is 'FECHA DE EFECTP DEL SUPLEMENTO';
+comment on column A2000030.fec_vcto_spto
+  is 'FECHA DE VENCIMIENTO DEL SUPLEMENTO';
+comment on column A2000030.tip_duracion
+  is 'DURACION DE LA POLIZA (1)ANUAL, (2)TEMPORAL NO RENOVABLE, (5)TEMPORAL RENOVABLE POR SU TEMPORALIDAD, (6)TEMPORAL RENOVABLE';
+comment on column A2000030.num_riesgos
+  is 'NUMERO TOTAL DE RIESGOS QUE HA TENIDO LA POLIZA';
+comment on column A2000030.cod_mon
+  is 'CODIGO MONEDA DE LA POLIZA';
+comment on column A2000030.cod_fracc_pago
+  is 'CODIGO DE LA FORMA DE PAGO/PLAN DE PAGO';
+comment on column A2000030.cant_renovaciones
+  is 'NUMERO MAXIMO DE RENOVACIONES QUE TENDRA LA POLIZA';
+comment on column A2000030.num_renovaciones
+  is 'CANTIDAD DE RENOVACIONES REALIZADAS';
+comment on column A2000030.tip_coaseguro
+  is 'TIPO COASEGURO (0)SIN COASEGURO (1)CEDIDO (2)ACEPTADO';
+comment on column A2000030.num_presupuesto
+  is 'NUMERO DE PRESUPUESTO SI LA POLIZA SE REALIZO A PARTIR DE UN PRESUPUESTO';
+comment on column A2000030.num_poliza_anterior
+  is 'NUMERO DE POLIZA ANTERIOR (PARA CAMBIOS DE NUMERO DE POLIZA)';
+comment on column A2000030.num_poliza_cliente
+  is 'NUMERO POLIZA CLIENTE';
+comment on column A2000030.num_contrato
+  is 'NUMERO DEL CONTRATO';
+comment on column A2000030.num_poliza_grupo
+  is 'NUMERO DE POLIZA GRUPO';
+comment on column A2000030.num_secu_grupo
+  is 'NUMERO DE SECUIENCIA DENTRO DE LA POLIZA GRUPO';
+comment on column A2000030.cod_spto
+  is 'CODIGO DE SUPLEMENTO';
+comment on column A2000030.sub_cod_spto
+  is 'SUBCODIGO DE SUPLEMENTO';
+comment on column A2000030.cod_tip_spto
+  is 'CODIGO DEL MOTIVO DEL SUPLEMENTO';
+comment on column A2000030.tip_spto
+  is 'TIPO DE SUPLEMENTO';
+comment on column A2000030.txt_motivo_spto
+  is 'DESCRIPCION DEL MOTIVO DEL SUPLEMENTO';
+comment on column A2000030.tip_docum
+  is 'TIPO DE DOCUMENTO DEL TOMADOR';
+comment on column A2000030.cod_docum
+  is 'DOCUMENTO DEL TOMADOR';
+comment on column A2000030.cod_cuadro_com
+  is 'CODIGO DEL CUADRO DE COMISIONES';
+comment on column A2000030.cod_agt
+  is 'CODIGO DEL AGENTE PRINCIPAL';
+comment on column A2000030.pct_agt
+  is 'PORCENTAJE RELATIVO DEL TOTAL DE COMISIONES';
+comment on column A2000030.cod_org
+  is 'CODIGO DE ORGANIZADOR';
+comment on column A2000030.cod_asesor
+  is 'CODIGO DE ASESOR';
+comment on column A2000030.cod_nivel1
+  is 'CODIGO DEL PRIMER NIVEL DE LA ESTRUCTURA COMERCIAL';
+comment on column A2000030.cod_nivel2
+  is 'CODIGO DEL SEGUNDO NIVEL DE LA ESTRUCTURA COMERCIAL';
+comment on column A2000030.cod_nivel3
+  is 'CODIGO DEL TERCER NIVEL DE LA ESTRUCTURA COMERCIAL';
+comment on column A2000030.cod_compensacion
+  is 'CODIGO DE COMPENSACION';
+comment on column A2000030.tip_gestor
+  is 'TIPO DE GESTOR DE COBRO';
+comment on column A2000030.cod_gestor
+  is 'CODIGO DE GESTOR DE COBRO';
+comment on column A2000030.mca_regulariza
+  is 'SI LA POLIZA SE VA A REVALORIZAR CUANDO SE RENUEVE';
+comment on column A2000030.tip_regulariza
+  is 'TIPO DE REVALORIZACION';
+comment on column A2000030.pct_regulariza
+  is 'PORCENTAJE DE REVALORIZACION';
+comment on column A2000030.cod_indice
+  is 'CODIGO DEL INDICE DE REVALORIZACION';
+comment on column A2000030.anios_max_duracion
+  is 'ANOS DE DURACION DE LA SOLICITUD';
+comment on column A2000030.meses_max_duracion
+  is 'MESES DE DURACION DE LA SOLICITUD';
+comment on column A2000030.dias_max_duracion
+  is 'DIAS DE DURACION DE LA SOLICITUD';
+comment on column A2000030.cod_agt2
+  is 'CODIGO DE AGENTE DE SEGUNDA INTERVENCION';
+comment on column A2000030.pct_agt2
+  is 'PORCENTAJE RELATIVO DEL TOTAL DE COMISIONES PARA AGENTE 2';
+comment on column A2000030.cod_agt3
+  is 'CODIGO DE AGENTE DE TERCERA INTERVENCION';
+comment on column A2000030.pct_agt3
+  is 'PORCENTAJE RELATIVO DEL TOTAL DE COMISIONES PARA AGENTE 3';
+comment on column A2000030.cod_agt4
+  is 'CODIGO DE AGENTE DE CUARTA INTERVENCION';
+comment on column A2000030.pct_agt4
+  is 'PORCENTAJE RELATIVO DEL TOTAL DE COMISIONES PARA AGENTE 4';
+comment on column A2000030.duracion_pago_prima
+  is 'DURACION DE PAGO DE PRIMAS (ANOS)';
+comment on column A2000030.cod_envio
+  is 'CODIGO DE ENVIO';
+comment on column A2000030.cod_ejecutivo
+  is 'CODIGO DE EJECUTIVO DE CUENTAS';
+comment on column A2000030.mca_tomadores_alt
+  is 'SI TIENE TOMADORES ALTERNOS';
+comment on column A2000030.mca_reaseguro_manual
+  is 'SI EL REASEGURO SE DISTRIBUYE MANUALMENTE';
+comment on column A2000030.mca_prorrata
+  is 'CALCULO A PRORRATA O ESCALA';
+comment on column A2000030.mca_prima_manual
+  is 'LA POLIZA LLEVA PRIMAS MANUALES';
+comment on column A2000030.mca_provisional
+  is 'MOVIMIENTO RETENIDO POR CONTROL TECNICO';
+comment on column A2000030.fec_autorizacion
+  is 'FECHA EN LA QUE SE AUTORIZO EL ULTIMO CONTROL TECNICO';
+comment on column A2000030.mca_poliza_anulada
+  is 'POLIZA ANULADA';
+comment on column A2000030.mca_spto_anulado
+  is 'SUPLEMENTO ANULADO';
+comment on column A2000030.num_spto_anulado
+  is 'NUMERO DE SUPLEMENTO ANULADO/ANULADOR';
+comment on column A2000030.fec_spto_anulado
+  is 'FECHA DE ANULACION DEL SUPLEMENTO';
+comment on column A2000030.mca_spto_tmp
+  is 'SUPLEMENTO TEMPORAL';
+comment on column A2000030.mca_datos_minimos
+  is 'NO SE USA (UTILIZABLE PARA CARGAS DE CARTERA CON APERTURA DE SINIESTROS)';
+comment on column A2000030.mca_impresion
+  is 'IMPRESION DE LA POLIZA';
+comment on column A2000030.mca_exclusivo
+  is 'LA POLIZA ESTA SIENDO ACTUALIZADA';
+comment on column A2000030.cod_usr
+  is 'CODIGO DE USUARIO QUE ACTUALIZO';
+comment on column A2000030.cod_nivel3_captura
+  is 'CODIGO DE TERCER NIVEL DEL USUARIO QUE ACTUALIZO';
+comment on column A2000030.fec_actu
+  is 'FECHA EN LA QUE SE REALIZO EL MOVIMIENTO';
+comment on column A2000030.mca_reaseguro_marco
+  is 'LAS APLICACIONES DE TRANSPORTES SE REASEGURA SEGUN POLIZA MARCO';
+comment on column A2000030.tip_poliza_tr
+  is 'TIPO DE POLIZA';
+comment on column A2000030.num_poliza_siguiente
+  is 'EN QUE POLIZA SE HA CONVERTIDO';
+comment on column A2000030.cod_dst_agt
+  is 'CODIGO DE DISTRIBUCION DE COMISIONES';
+comment on column A2000030.cod_cuadro_coa
+  is 'CODIGO DE CUADRO DE COASEGURO';
+-- Create/Recreate indexes 
+create index I_A2000030_COD_AGT on A2000030 (COD_AGT)
+  tablespace INDICES
+  pctfree 10
+  initrans 2
+  maxtrans 255
+  storage
+  (
+    initial 10M
+    next 1M
+    minextents 1
+    maxextents unlimited
+  );
+create index I_A2000030_COD_EJECUTIVO on A2000030 (COD_EJECUTIVO)
+  tablespace INDICES
+  pctfree 10
+  initrans 2
+  maxtrans 255
+  storage
+  (
+    initial 6M
+    next 1M
+    minextents 1
+    maxextents unlimited
+  );
+create index I_A2000030_COD_NIVEL on A2000030 (COD_NIVEL1, COD_NIVEL2, COD_NIVEL3)
+  tablespace INDICES
+  pctfree 10
+  initrans 2
+  maxtrans 255
+  storage
+  (
+    initial 30M
+    next 1M
+    minextents 1
+    maxextents unlimited
+  );
+create index I_A2000030_COD_ORG on A2000030 (COD_ORG)
+  tablespace INDICES
+  pctfree 10
+  initrans 2
+  maxtrans 255
+  storage
+  (
+    initial 5760K
+    next 1M
+    minextents 1
+    maxextents unlimited
+  );
+create index I_A2000030_COD_RAMO on A2000030 (COD_RAMO, COD_CIA)
+  tablespace INDICES
+  pctfree 10
+  initrans 2
+  maxtrans 255
+  storage
+  (
+    initial 64K
+    next 1M
+    minextents 1
+    maxextents unlimited
+  );
+create index I_A2000030_COD_SPTO on A2000030 (COD_SPTO, SUB_COD_SPTO, COD_CIA)
+  tablespace INDICES
+  pctfree 10
+  initrans 2
+  maxtrans 255
+  storage
+  (
+    initial 64K
+    next 1M
+    minextents 1
+    maxextents unlimited
+  );
+create index I_A2000030_COD_USR on A2000030 (COD_USR)
+  tablespace INDICES
+  pctfree 10
+  initrans 2
+  maxtrans 255
+  storage
+  (
+    initial 10M
+    next 1M
+    minextents 1
+    maxextents unlimited
+  );
+create index I_A2000030_FEC_ACTU on A2000030 (FEC_ACTU, COD_CIA)
+  tablespace DATOS
+  pctfree 10
+  initrans 2
+  maxtrans 255
+  storage
+  (
+    initial 64K
+    next 1M
+    minextents 1
+    maxextents unlimited
+  );
+create index I_A2000030_FEC_EMISION_SPTO on A2000030 (FEC_EMISION_SPTO, COD_CIA)
+  tablespace INDICES
+  pctfree 10
+  initrans 2
+  maxtrans 255
+  storage
+  (
+    initial 30M
+    next 1M
+    minextents 1
+    maxextents unlimited
+  );
+create index I_A2000030_FEC_VCTO_POLIZA on A2000030 (FEC_VCTO_POLIZA, COD_CIA)
+  tablespace INDICES
+  pctfree 10
+  initrans 2
+  maxtrans 255
+  storage
+  (
+    initial 30M
+    next 1M
+    minextents 1
+    maxextents unlimited
+  );
+create index I_A2000030_FEC_VCTO_SPTO on A2000030 (CASE COD_RAMO WHEN 101 THEN DECODE(TO_CHAR(FEC_VCTO_SPTO,'YYYY'),'2100',ADD_MONTHS(FEC_EFEC_SPTO,2),FEC_VCTO_POLIZA) WHEN 102 THEN DECODE(TO_CHAR(FEC_VCTO_SPTO,'YYYY'),'2100',ADD_MONTHS(FEC_EFEC_SPTO,2),FEC_VCTO_POLIZA) WHEN 103 THEN DECODE(TO_CHAR(FEC_VCTO_SPTO,'YYYY'),'2100',ADD_MONTHS(FEC_EFEC_SPTO,2),FEC_VCTO_POLIZA) WHEN 104 THEN DECODE(TO_CHAR(FEC_VCTO_SPTO,'YYYY'),'2100',ADD_MONTHS(FEC_EFEC_SPTO,2),FEC_VCTO_POLIZA) WHEN 106 THEN DECODE(TO_CHAR(FEC_VCTO_SPTO,'YYYY'),'2100',ADD_MONTHS(FEC_EFEC_SPTO,2),FEC_VCTO_POLIZA) WHEN 109 THEN DECODE(TO_CHAR(FEC_VCTO_SPTO,'YYYY'),'2100',ADD_MONTHS(FEC_EFEC_SPTO,2),FEC_VCTO_POLIZA) WHEN 171 THEN ADD_MONTHS(FEC_VCTO_POLIZA,13) WHEN 170 THEN ADD_MONTHS(FEC_VCTO_POLIZA,13) WHEN 172 THEN ADD_MONTHS(FEC_VCTO_POLIZA,13) ELSE ADD_MONTHS(FEC_VCTO_POLIZA,3) END, COD_CIA)
+  tablespace INDICES
+  pctfree 10
+  initrans 2
+  maxtrans 255
+  storage
+  (
+    initial 64K
+    next 1M
+    minextents 1
+    maxextents unlimited
+  );
+create index I_A2000030_MCA_IMPRESION on A2000030 (MCA_IMPRESION)
+  tablespace INDICES
+  pctfree 10
+  initrans 2
+  maxtrans 255
+  storage
+  (
+    initial 6M
+    next 1M
+    minextents 1
+    maxextents unlimited
+  );
+create index I_A2000030_MCA_PROVISIONAL on A2000030 (DECODE(MCA_PROVISIONAL,'S',DECODE(COD_CIA,1,DECODE(COD_RAMO,1,1,8,NULL,9,NULL,1),COD_CIA)))
+  tablespace INDICES
+  pctfree 10
+  initrans 2
+  maxtrans 255
+  storage
+  (
+    initial 64K
+    next 1M
+    minextents 1
+    maxextents unlimited
+  );
+create index I_A2000030_NUM_CONTRATO on A2000030 (NUM_CONTRATO)
+  tablespace INDICES
+  pctfree 10
+  initrans 2
+  maxtrans 255
+  storage
+  (
+    initial 128K
+    next 1M
+    minextents 1
+    maxextents unlimited
+  );
+create index I_A2000030_NUM_POL_CLIENTE on A2000030 (NUM_POLIZA_CLIENTE)
+  tablespace INDICES
+  pctfree 10
+  initrans 2
+  maxtrans 255
+  storage
+  (
+    initial 1920K
+    next 1M
+    minextents 1
+    maxextents unlimited
+  );
+create index I_A2000030_NUM_POL_GRUPO on A2000030 (NUM_POLIZA_GRUPO)
+  tablespace INDICES
+  pctfree 10
+  initrans 2
+  maxtrans 255
+  storage
+  (
+    initial 64K
+    next 1M
+    minextents 1
+    maxextents unlimited
+  );
+create index I_A2000030_NUM_POLIZA_ANTERIOR on A2000030 (NUM_POLIZA_ANTERIOR)
+  tablespace INDICES
+  pctfree 10
+  initrans 2
+  maxtrans 255
+  storage
+  (
+    initial 3456K
+    next 1M
+    minextents 1
+    maxextents unlimited
+  );
+create index I_A2000030_NUM_PRESUPUESTO on A2000030 (NUM_PRESUPUESTO)
+  tablespace INDICES
+  pctfree 10
+  initrans 2
+  maxtrans 255
+  storage
+  (
+    initial 6784K
+    next 1M
+    minextents 1
+    maxextents unlimited
+  );
+create index I_A2000030_TIP_COASEGURO on A2000030 (TIP_COASEGURO)
+  tablespace INDICES
+  pctfree 10
+  initrans 2
+  maxtrans 255
+  storage
+  (
+    initial 6M
+    next 1M
+    minextents 1
+    maxextents unlimited
+  );
+create index I_A2000030_TIP_DOCUM on A2000030 (TIP_DOCUM, COD_DOCUM)
+  tablespace INDICES
+  pctfree 10
+  initrans 2
+  maxtrans 255
+  storage
+  (
+    initial 60M
+    next 1M
+    minextents 1
+    maxextents unlimited
+  );
+-- Create/Recreate primary, unique and foreign key constraints 
+alter table A2000030
+  add constraint PK_A2000030 primary key (COD_CIA, NUM_POLIZA, NUM_SPTO, NUM_APLI, NUM_SPTO_APLI)
+  using index 
+  tablespace INDICES
+  pctfree 10
+  initrans 2
+  maxtrans 255
+  storage
+  (
+    initial 204928K
+    next 1M
+    minextents 1
+    maxextents unlimited
+  );
+-- Grant/Revoke object privileges 
+grant select on A2000030 to TRONBPM;
+grant select on A2000030 to TRONGOD;
+
+
+-- Create table
+create table A2000031
+(
+  cod_cia           NUMBER(2) not null,
+  num_poliza        VARCHAR2(13) not null,
+  num_spto          NUMBER not null,
+  num_apli          NUMBER(5) not null,
+  num_spto_apli     NUMBER not null,
+  num_riesgo        NUMBER(6) not null,
+  tip_spto          VARCHAR2(2) not null,
+  cod_modalidad     NUMBER(5) not null,
+  nom_riesgo        VARCHAR2(80) not null,
+  fec_efec_riesgo   DATE not null,
+  fec_vcto_riesgo   DATE not null,
+  mca_baja_riesgo   VARCHAR2(1) not null,
+  mca_vigente       VARCHAR2(1) not null,
+  mca_exclusivo     VARCHAR2(1),
+  cod_usr_exclusivo VARCHAR2(8),
+  num_certificado   NUMBER(6),
+  nom_certificado   VARCHAR2(30)
+)
+  
+  
+  -- Create table
+create table A9990015
+(
+  cod_cia          NUMBER(2) not null,
+  cod_ramo         NUMBER(3) not null,
+  num_secu         NUMBER(4) not null,
+  cod_clausula     VARCHAR2(15) not null,
+  cod_cob          NUMBER(4),
+  nom_prg          VARCHAR2(61),
+  cod_usr          VARCHAR2(8) not null,
+  fec_actu         DATE not null,
+  tip_act_clausula VARCHAR2(1) not null,
+  fec_validez      DATE not null,
+  mca_inh          VARCHAR2(1) not null
+)
+tablespace DATOS
+  pctfree 10
+  initrans 1
+  maxtrans 255
+  storage
+  (
+    initial 128K
+    next 1M
+    minextents 1
+    maxextents unlimited
+  );
+-- Add comments to the table 
+comment on table A9990015
+  is 'TABLA DE CLAUSULAS POR RAMO/COBERTURA';
+-- Add comments to the columns 
+comment on column A9990015.cod_cia
+  is 'CODIGO DE COMPANIA ';
+comment on column A9990015.cod_ramo
+  is 'CODIGO DE RAMO ';
+comment on column A9990015.num_secu
+  is 'NUMERO DE SECUENCIA DE LA CLAUSULA ';
+comment on column A9990015.cod_clausula
+  is 'CODIGO DE LA CLAUSULA ';
+comment on column A9990015.cod_cob
+  is 'CODIGO COBERTURA ASOCIADA A LA CLAUSULA';
+comment on column A9990015.nom_prg
+  is 'PROCEDIMIENTO QUE DETERMINA SI SE SELECCIONA LA CLAUSULA';
+comment on column A9990015.cod_usr
+  is 'CODIGO DE USUARIO QUE ACTUALIZO ';
+comment on column A9990015.fec_actu
+  is 'FECHA DE ULTIMA ACTUALIZACION ';
+comment on column A9990015.tip_act_clausula
+  is 'TIPO DE ACTUALIZACION 1/BORRAR
+2/ALTA 3/NINGUNA 4/BORRAR/ALTA';
+comment on column A9990015.fec_validez
+  is 'FECHA DE VALIDEZ DEL RAMO';
+comment on column A9990015.mca_inh
+  is 'MARCA DE CLAUSULA INHABILITADA PARA EL RAMO';
+-- Create/Recreate primary, unique and foreign key constraints 
+alter table A9990015
+  add constraint PK_A9990015 primary key (COD_CIA, COD_RAMO, COD_CLAUSULA, FEC_VALIDEZ)
+  using index 
+  tablespace INDICES
+  pctfree 10
+  initrans 2
+  maxtrans 255
+  storage
+  (
+    initial 128K
+    next 1M
+    minextents 1
+    maxextents unlimited
+  );
+
+  
+  -- Create table
+create table G2000161
+(
+  cod_cia                  NUMBER(2) not null,
+  num_secu                 NUMBER(2) not null,
+  cod_eco                  NUMBER(3) not null,
+  nom_eco                  VARCHAR2(30) not null,
+  abr_eco                  VARCHAR2(5) not null,
+  tip_cod_eco              VARCHAR2(1) not null,
+  mca_fracc                VARCHAR2(1) not null,
+  mca_coaseguro            VARCHAR2(1) not null,
+  mca_comis1               VARCHAR2(1),
+  mca_comis2               VARCHAR2(1),
+  mca_comis3               VARCHAR2(1),
+  mca_comis4               VARCHAR2(1),
+  mca_interes              VARCHAR2(1) not null,
+  mca_calculo_comis        VARCHAR2(1) not null,
+  nom_prg_calculo          VARCHAR2(61),
+  tip_base_calculo_cp      VARCHAR2(3),
+  mca_deposita_calculo_cp0 VARCHAR2(1) not null,
+  mca_deposita_calculo_cp1 VARCHAR2(1) not null,
+  mca_deposita_calculo_cp2 VARCHAR2(1) not null,
+  mca_deposita_calculo_cp3 VARCHAR2(1) not null,
+  mca_deposita_calculo_cp4 VARCHAR2(1) not null,
+  mca_deposita_calculo_cp5 VARCHAR2(1) not null,
+  mca_deposita_calculo_cp6 VARCHAR2(1) not null,
+  mca_deposita_calculo_cp7 VARCHAR2(1) not null,
+  mca_deposita_calculo_cp8 VARCHAR2(1) not null,
+  mca_deposita_calculo_cp9 VARCHAR2(1) not null,
+  cod_usr                  VARCHAR2(8) not null,
+  fec_actu                 DATE not null
+)
+tablespace DATOS
+  pctfree 10
+  initrans 1
+  maxtrans 255
+  storage
+  (
+    initial 128K
+    next 1M
+    minextents 1
+    maxextents unlimited
+  );
+-- Add comments to the table 
+comment on table G2000161
+  is 'DEFINICION DE LOS CONCEPTOS ECONOMICOS DE RECIBO';
+-- Add comments to the columns 
+comment on column G2000161.cod_cia
+  is 'CODIGO DE COMPANIA';
+comment on column G2000161.num_secu
+  is 'ORDEN DE APARICION';
+comment on column G2000161.cod_eco
+  is 'CODIGO DE CONCEPTO ECONOMICO';
+comment on column G2000161.nom_eco
+  is 'NOMBRE DEL CONCEPTO ECONOMICO';
+comment on column G2000161.abr_eco
+  is 'NOMBRE CORTO DEL CONCEPTO ECONOMICO';
+comment on column G2000161.tip_cod_eco
+  is 'TIPO DE CONCEPTO : N-PRIMA NETA, B-BONIFICACION, R-RECARGO, I-IMPUESTO';
+comment on column G2000161.mca_fracc
+  is 'INDICA SI SE FRACCIONA O EL IMPORTE TOTAL PASA AL PRIMER RECIBO';
+comment on column G2000161.mca_coaseguro
+  is 'INDICA SI SE CEDE O NO AL COASEGURO ';
+comment on column G2000161.mca_comis1
+  is 'SI CALCULA O NO COMISION 1 PARA EL COASEGURO ';
+comment on column G2000161.mca_comis2
+  is 'SI CALCULA O NO COMISION 2 PARA EL COASEGURO ';
+comment on column G2000161.mca_comis3
+  is 'SI CALCULA O NO COMISION 3 PARA EL COASEGURO ';
+comment on column G2000161.mca_comis4
+  is 'SI CALCULA O NO COMISION 4 PARA EL COASEGURO ';
+comment on column G2000161.mca_interes
+  is 'INDICA SI EL CONCEPTO ES ESPECIFICO PARA CALCULO DE INTERESES (PLANES DE PAGO)';
+comment on column G2000161.mca_calculo_comis
+  is 'INDICA SI SE CALCULAN COMISIONES (APLICABLE A CONCEPTOS TIPO -R-)';
+comment on column G2000161.nom_prg_calculo
+  is 'PROCEDIMIENTO DE CALCULO ';
+comment on column G2000161.tip_base_calculo_cp
+  is 'BASE DE CALCULO';
+comment on column G2000161.mca_deposita_calculo_cp0
+  is 'INDICA SI EL CALCULO DE ESTE CONCEPTO SE IRA ACUMULANDO EN LA VARIABLE';
+comment on column G2000161.mca_deposita_calculo_cp1
+  is 'INDICA SI EL CALCULO DE ESTE CONCEPTO SE IRA ACUMULANDO EN LA VARIABLE';
+comment on column G2000161.mca_deposita_calculo_cp2
+  is 'INDICA SI EL CALCULO DE ESTE CONCEPTO SE IRA ACUMULANDO EN LA VARIABLE';
+comment on column G2000161.mca_deposita_calculo_cp3
+  is 'INDICA SI EL CALCULO DE ESTE CONCEPTO SE IRA ACUMULANDO EN LA VARIABLE';
+comment on column G2000161.mca_deposita_calculo_cp4
+  is 'INDICA SI EL CALCULO DE ESTE CONCEPTO SE IRA ACUMULANDO EN LA VARIABLE';
+comment on column G2000161.mca_deposita_calculo_cp5
+  is 'INDICA SI EL CALCULO DE ESTE CONCEPTO SE IRA ACUMULANDO EN LA VARIABLE';
+comment on column G2000161.mca_deposita_calculo_cp6
+  is 'INDICA SI EL CALCULO DE ESTE CONCEPTO SE IRA ACUMULANDO EN LA VARIABLE';
+comment on column G2000161.mca_deposita_calculo_cp7
+  is 'INDICA SI EL CALCULO DE ESTE CONCEPTO SE IRA ACUMULANDO EN LA VARIABLE';
+comment on column G2000161.mca_deposita_calculo_cp8
+  is 'INDICA SI EL CALCULO DE ESTE CONCEPTO SE IRA ACUMULANDO EN LA VARIABLE';
+comment on column G2000161.mca_deposita_calculo_cp9
+  is 'INDICA SI EL CALCULO DE ESTE CONCEPTO SE IRA ACUMULANDO EN LA VARIABLE';
+comment on column G2000161.cod_usr
+  is 'CODIGO DE USUARIO QUE HACE LA DEFINICION ';
+comment on column G2000161.fec_actu
+  is 'FECHA DE ULTIMA ACTUALIZACION ';
+-- Create/Recreate indexes 
+create unique index I1_G2000161 on G2000161 (COD_CIA, NUM_SECU)
+  tablespace INDICES
+  pctfree 10
+  initrans 2
+  maxtrans 255
+  storage
+  (
+    initial 128K
+    next 1M
+    minextents 1
+    maxextents unlimited
+  );
+-- Create/Recreate primary, unique and foreign key constraints 
+alter table G2000161
+  add constraint PK_G2000161 primary key (COD_CIA, COD_ECO)
+  using index 
+  tablespace INDICES
+  pctfree 10
+  initrans 2
+  maxtrans 255
+  storage
+  (
+    initial 128K
+    next 1M
+    minextents 1
+    maxextents unlimited
+  );
+
+  -- Create table
+create table A1001402
+(
+  cod_cia        NUMBER(2) not null,
+  cod_fracc_pago NUMBER(5) not null,
+  nom_fracc_pago VARCHAR2(30) not null,
+  abr_fracc_pago VARCHAR2(5) not null,
+  num_cuotas     NUMBER(2) not null,
+  mca_aplicacion VARCHAR2(1) not null,
+  mca_pago_unico VARCHAR2(1) not null,
+  cod_usr        VARCHAR2(8) not null,
+  fec_actu       DATE not null
+)
+tablespace DATOS
+  pctfree 10
+  initrans 1
+  maxtrans 255
+  storage
+  (
+    initial 128K
+    next 1M
+    minextents 1
+    maxextents unlimited
+  );
+-- Add comments to the table 
+comment on table A1001402
+  is 'FORMAS DE PAGO/PLANES DE PAGO DE LA COMPA?IA';
+-- Add comments to the columns 
+comment on column A1001402.cod_cia
+  is 'CODIGO DE COMPANIA ';
+comment on column A1001402.cod_fracc_pago
+  is 'CODIGO DE FORMA DE PAGO/PLAN DE PAGO';
+comment on column A1001402.nom_fracc_pago
+  is 'DESCRIPCION DE LA FORMA DE PAGO/PLAN DE PAGO';
+comment on column A1001402.abr_fracc_pago
+  is 'NOMBRE ABREVIADO DE LA FORMA DE PAGO/PLAN DE PAGO';
+comment on column A1001402.num_cuotas
+  is 'NUMERO DE CUOTAS (CERO CUOTAS ES UN PLAN DE PAGO)';
+comment on column A1001402.mca_aplicacion
+  is 'INDICA QUE ES UNA FORMA DE PAGO/PLAN DE PAGO UTILIZABLE EN APLICACIONES';
+comment on column A1001402.mca_pago_unico
+  is 'PAGO UNICO';
+comment on column A1001402.cod_usr
+  is 'USUARIO QUE ACTUALIZA ';
+comment on column A1001402.fec_actu
+  is 'ULTIMA FECHA DE ACTUALIZACION';
+-- Create/Recreate primary, unique and foreign key constraints 
+alter table A1001402
+  add constraint PK_A1001402 primary key (COD_CIA, COD_FRACC_PAGO)
+  using index 
+  tablespace INDICES
+  pctfree 10
+  initrans 2
+  maxtrans 255
+  storage
+  (
+    initial 128K
+    next 1M
+    minextents 1
+    maxextents unlimited
+  );
+
+  
+  -- Create table
+create table A1001410
+(
+  cod_cia               NUMBER(2) not null,
+  cod_plan_pago         NUMBER(5) not null,
+  num_cuotas            NUMBER(2) not null,
+  tip_dst_cuotas        VARCHAR2(1) not null,
+  tip_fec_ini           VARCHAR2(1) not null,
+  nom_prg_fec_ini       VARCHAR2(61),
+  tip_fec_fin           VARCHAR2(1) not null,
+  nom_prg_fec_fin       VARCHAR2(61),
+  tip_dst_ap            VARCHAR2(1) not null,
+  mca_fec_efec_nueva_as VARCHAR2(1) not null,
+  tip_dst_vcto          VARCHAR2(1) not null,
+  nom_prg_tip_dst_vcto  VARCHAR2(61),
+  tip_cuota_minima      VARCHAR2(1) not null,
+  nom_prg_interes       VARCHAR2(61),
+  nom_prg_interes_at    VARCHAR2(61),
+  nom_prg_altera_cuota  VARCHAR2(61),
+  mca_inh               VARCHAR2(1) not null,
+  cod_usr               VARCHAR2(8) not null,
+  fec_actu              DATE not null
+)
+tablespace DATOS
+  pctfree 10
+  initrans 1
+  maxtrans 255
+  storage
+  (
+    initial 384K
+    next 1M
+    minextents 1
+    maxextents unlimited
+  );
+-- Add comments to the table 
+comment on table A1001410
+  is 'PLANES DE PAGO';
+-- Add comments to the columns 
+comment on column A1001410.cod_cia
+  is 'COMPA?IA';
+comment on column A1001410.cod_plan_pago
+  is 'PLAN DE PAGO';
+comment on column A1001410.num_cuotas
+  is 'NUMERO DE CUOTAS QUE TIENE';
+comment on column A1001410.tip_dst_cuotas
+  is 'FORMA DE DISTRIBUIR LAS CUOTAS';
+comment on column A1001410.tip_fec_ini
+  is 'FECHA QUE SE TOMA COMO INICIO PARA LA GENERACION DE LAS CUOTAS';
+comment on column A1001410.nom_prg_fec_ini
+  is 'PROGRAMA QUE HALLA LA FECHA QUE SE TOMA COMO FIN PARA LA GENERACION DE CUOTAS';
+comment on column A1001410.tip_fec_fin
+  is 'FECHA QUE SE TOMA COMO FIN PARA LA GENERACION DE LAS CUOTAS';
+comment on column A1001410.tip_dst_ap
+  is 'FORMA DE DISTRIBUIR LAS CUOTAS EN ANULACIONES PARCIALES';
+comment on column A1001410.mca_fec_efec_nueva_as
+  is 'SI EN ANULACION DE SUPLEMENTOS HALLA DE NUEVO LA FECHA BASE O TOMA LAS DEL SUPLEMENTO QUE SE DESEA ANULAR';
+comment on column A1001410.tip_dst_vcto
+  is 'FORMA DE DISTRIBUCION CUANDO LAS CUOTAS DEL PLAN DE PAGO NO ENTRAN EN LA VIGENCIA DEL MOVIMIENTO';
+comment on column A1001410.nom_prg_tip_dst_vcto
+  is 'PROCEDIMIENTO QUE DETERMINA LA FORMA DE DISTRIBUIR CUANDO LAS CUOTAS NO ENTRAN EN LA VIGENCIA';
+comment on column A1001410.tip_cuota_minima
+  is 'TIPO DE ACCION QUE SE DESEA CUANDO EL IMPORTE DE LAS CUOTAS NO LLEGA AL MINIMO DEFINIDO';
+comment on column A1001410.nom_prg_interes
+  is 'PROGRAMA QUE CALCULA LOS INTERESES';
+comment on column A1001410.nom_prg_interes_at
+  is 'PROGRAMA QUE HALLA EL INTERES DE LA PRIMERA CUOTA CUANDO ESTA NO TIENE UN RECIBO YA GENERADO COMO BASE PARA ANULARLO. SOLO USADO EN ANULACIONES TOTALES';
+comment on column A1001410.nom_prg_altera_cuota
+  is 'PROGRAMA QUE ALTERA LOS CONCEPTOS ECONOMICOS (FRACCIONABLES) DE LA CUOTA CALCULADA ANTES POR LA RUTINA';
+comment on column A1001410.mca_inh
+  is 'PLAN DE PAGO INHABILTIADO';
+comment on column A1001410.cod_usr
+  is 'USUARIO QUE REALIZO LA MODIFICACION';
+comment on column A1001410.fec_actu
+  is 'FECHA DE MODIFICACION';
+-- Create/Recreate primary, unique and foreign key constraints 
+alter table A1001410
+  add constraint PK_A1001410 primary key (COD_CIA, COD_PLAN_PAGO)
+  using index 
+  tablespace INDICES
+  pctfree 10
+  initrans 2
+  maxtrans 255
+  storage
+  (
+    initial 384K
+    next 1M
+    minextents 1
+    maxextents unlimited
+  );
+
+  
+  -- Create table
+create table A1001420
+(
+  cod_cia              NUMBER(2) not null,
+  cod_plan_pago        NUMBER(5) not null,
+  num_cuota            NUMBER(2) not null,
+  tip_unidad           VARCHAR2(1) not null,
+  num_unidades         NUMBER(3) not null,
+  nom_prg_num_unidades VARCHAR2(61),
+  pct_imp              NUMBER not null,
+  nom_prg_pct_imp      VARCHAR2(61),
+  pct_comis            NUMBER not null,
+  nom_prg_pct_comis    VARCHAR2(61),
+  cod_usr              VARCHAR2(8) not null,
+  fec_actu             DATE not null
+)
+tablespace DATOS
+  pctfree 10
+  initrans 1
+  maxtrans 255
+  storage
+  (
+    initial 384K
+    next 1M
+    minextents 1
+    maxextents unlimited
+  );
+-- Add comments to the table 
+comment on table A1001420
+  is 'CUOTAS DE UN PLAN DE PAGO';
+-- Add comments to the columns 
+comment on column A1001420.cod_cia
+  is 'COMPA?IA';
+comment on column A1001420.cod_plan_pago
+  is 'PLAN DE PAGO';
+comment on column A1001420.num_cuota
+  is 'NUMERO DE CUOTA';
+comment on column A1001420.tip_unidad
+  is 'MEDIDA QUE SE UTILIZARA PARA LA CREACION DE LOS EFECTOS/VENCIMIENTOS';
+comment on column A1001420.num_unidades
+  is 'EFECTO DE LA CUOTA. SERA A PARTIR DEL EFECTO/EMISION DEL SUPLEMENTO';
+comment on column A1001420.nom_prg_num_unidades
+  is 'PROCEDIMIENTO QUE DETERMINA EL EFECTO DE LA CUOTA';
+comment on column A1001420.pct_imp
+  is '% DEL CALCULO QUE VA A LA CUOTA';
+comment on column A1001420.nom_prg_pct_imp
+  is 'PROCEDIMIENTO QUE INDICA EL % DEL CALCULO QUE VA A LA CUOTA';
+comment on column A1001420.pct_comis
+  is '% DE COMISION DE LA CUOTA';
+comment on column A1001420.nom_prg_pct_comis
+  is 'PROCEDIMIENTO QUE INDICA EL % DE COMISION DE LA CUOTA';
+comment on column A1001420.cod_usr
+  is 'USUARIO QUE REALIZO LA MODIFICACION';
+comment on column A1001420.fec_actu
+  is 'FECHA DE MODIFICACION';
+-- Create/Recreate primary, unique and foreign key constraints 
+alter table A1001420
+  add constraint PK_A1001420 primary key (COD_CIA, COD_PLAN_PAGO, NUM_CUOTA)
+  using index 
+  tablespace INDICES
+  pctfree 10
+  initrans 2
+  maxtrans 255
+  storage
+  (
+    initial 384K
+    next 1M
+    minextents 1
+    maxextents unlimited
+  );
+
+  -- Create table
+create table A1001403
+(
+  cod_cia           NUMBER(2) not null,
+  cod_ramo          NUMBER(3) not null,
+  cod_mon           NUMBER(2) not null,
+  cod_fracc_pago    NUMBER(5) not null,
+  pct_primera_cuota NUMBER,
+  nom_prg_pct_cuota VARCHAR2(61),
+  fec_validez       DATE not null,
+  cod_usr           VARCHAR2(8),
+  fec_actu          DATE
+)
+tablespace DATOS
+  pctfree 10
+  initrans 1
+  maxtrans 255
+  storage
+  (
+    initial 128K
+    next 1M
+    minextents 1
+    maxextents unlimited
+  );
+-- Add comments to the table 
+comment on table A1001403
+  is 'FORMAS DE PAGO/PLANES DE PAGO DEL RAMO';
+-- Add comments to the columns 
+comment on column A1001403.cod_cia
+  is 'CODIGO DE COMPA?IA';
+comment on column A1001403.cod_ramo
+  is 'CODIGO DEL RAMO';
+comment on column A1001403.cod_mon
+  is 'CODIGO DE MONEDA';
+comment on column A1001403.cod_fracc_pago
+  is 'CODIGO DE FRACCIONAMIENTO
+DE PAGO (A1001402)';
+comment on column A1001403.pct_primera_cuota
+  is 'NO SE USA';
+comment on column A1001403.nom_prg_pct_cuota
+  is 'PROCEDIMIENTO DE CALCULO PARA EL PCT DE LA PRIMERA CUOTA';
+comment on column A1001403.fec_validez
+  is 'FECHA DE VALIDEZ DEL RAMO';
+comment on column A1001403.cod_usr
+  is 'CODIGO USUARIO DE LA ULTIMA
+ACTUALIZACION DEL REGISTRO ';
+comment on column A1001403.fec_actu
+  is 'FECHA DE LA ULTIMA ACTUALIZACION DEL REGISTRO ';
+-- Create/Recreate primary, unique and foreign key constraints 
+alter table A1001403
+  add constraint PK_A1001403 primary key (COD_CIA, COD_MON, COD_RAMO, COD_FRACC_PAGO, FEC_VALIDEZ)
+  using index 
+  tablespace INDICES
+  pctfree 10
+  initrans 2
+  maxtrans 255
+  storage
+  (
+    initial 128K
+    next 1M
+    minextents 1
+    maxextents unlimited
+  );
+
+  -- Create table
+create table G2000170
+(
+  cod_cia                 NUMBER(2) not null,
+  cod_desglose            NUMBER(3) not null,
+  nom_desglose            VARCHAR2(30) not null,
+  nom_cor_desglose        VARCHAR2(10) not null,
+  tip_ambito              VARCHAR2(1) not null,
+  mca_estudio             VARCHAR2(1) not null,
+  tip_base_calculo        VARCHAR2(2) not null,
+  tip_calculo             VARCHAR2(1) not null,
+  tasa_calculo            NUMBER,
+  imp_calculo             NUMBER,
+  nom_prg_calculo         VARCHAR2(61),
+  mca_devuelve            VARCHAR2(1) not null,
+  mca_aplica_prorrata     VARCHAR2(1) not null,
+  mca_calculo_automatico  VARCHAR2(1) not null,
+  cod_eco                 NUMBER(3) not null,
+  mca_deposita_calculo_c0 VARCHAR2(1) not null,
+  mca_deposita_calculo_c1 VARCHAR2(1) not null,
+  mca_deposita_calculo_c2 VARCHAR2(1) not null,
+  mca_deposita_calculo_c3 VARCHAR2(1) not null,
+  mca_deposita_calculo_c4 VARCHAR2(1) not null,
+  mca_deposita_calculo_c5 VARCHAR2(1) not null,
+  mca_deposita_calculo_c6 VARCHAR2(1) not null,
+  mca_deposita_calculo_c7 VARCHAR2(1) not null,
+  mca_deposita_calculo_c8 VARCHAR2(1) not null,
+  mca_deposita_calculo_c9 VARCHAR2(1) not null,
+  mca_deposita_calculo_r0 VARCHAR2(1) not null,
+  mca_deposita_calculo_r1 VARCHAR2(1) not null,
+  mca_deposita_calculo_r2 VARCHAR2(1) not null,
+  mca_deposita_calculo_r3 VARCHAR2(1) not null,
+  mca_deposita_calculo_r4 VARCHAR2(1) not null,
+  mca_deposita_calculo_p0 VARCHAR2(1) not null,
+  mca_deposita_calculo_p1 VARCHAR2(1) not null,
+  mca_deposita_calculo_p2 VARCHAR2(1) not null,
+  mca_deposita_calculo_p3 VARCHAR2(1) not null,
+  mca_deposita_calculo_p4 VARCHAR2(1) not null,
+  mca_deposita_calculo_t0 VARCHAR2(1) not null,
+  mca_deposita_calculo_t1 VARCHAR2(1) not null,
+  mca_deposita_calculo_t2 VARCHAR2(1) not null,
+  mca_deposita_calculo_t3 VARCHAR2(1) not null,
+  mca_deposita_calculo_t4 VARCHAR2(1) not null,
+  cod_usr                 VARCHAR2(8) not null,
+  fec_actu                DATE not null,
+  fec_validez             DATE not null,
+  nom_prg_no_consumido    VARCHAR2(61)
+)
+tablespace DATOS
+  pctfree 10
+  initrans 1
+  maxtrans 255
+  storage
+  (
+    initial 1152K
+    next 1M
+    minextents 1
+    maxextents unlimited
+  );
+-- Add comments to the table 
+comment on table G2000170
+  is 'TABLA DE CONCEPTOS DE DESGLOSE PARA LA COMPA?IA';
+-- Add comments to the columns 
+comment on column G2000170.cod_cia
+  is 'CODIGO DE COMPANIA';
+comment on column G2000170.cod_desglose
+  is 'CODIGO DE CONCEPTO DE DESGLOSE ';
+comment on column G2000170.nom_desglose
+  is 'NOMBRE DEL CONCEPTO DE DESGLOSE ';
+comment on column G2000170.nom_cor_desglose
+  is 'NOMBRE CORTO DEL CONCEPTO DE DESGLOSE ';
+comment on column G2000170.tip_ambito
+  is '(1) SOLO ES VALIDO EN NUEVA PRODUCCION, (2) SOLO ES VALIDO EN CARTERA, (3) ES VALIDO TANTO EN NUEVA PRODUCCION COMO CARTERA';
+comment on column G2000170.mca_estudio
+  is 'SI SE VA A REALIZAR ESTUDIO DE IMPORTES';
+comment on column G2000170.tip_base_calculo
+  is 'BASE DE CALCULO';
+comment on column G2000170.tip_calculo
+  is 'CALCULO QUE SE VA A REALIZAR';
+comment on column G2000170.tasa_calculo
+  is 'SI SE HA ELEGIDO COMO TIPO DE CALCULO TANTO POR CIENTO O TANTO POR MIL, SE ALMACENA EL TANTO';
+comment on column G2000170.imp_calculo
+  is 'SI SE HA LEGIDO COMO TIPO DE CALCULO  IMPORTE O IMPORTE POR UNIDAD, SE ALMACENA ESTE IMPORTE';
+comment on column G2000170.nom_prg_calculo
+  is 'OBJETO QUE REALIZA EL CALCULO ';
+comment on column G2000170.mca_devuelve
+  is 'EL CONCEPTO SE DEVUELVE EN CASO DE ANULACION DE LA POLIZA';
+comment on column G2000170.mca_aplica_prorrata
+  is 'INDICA SI EL CONCEPTO ES PRORRATEABLE';
+comment on column G2000170.mca_calculo_automatico
+  is 'INDICA SI EL CONCEPTO SE CALCULA SIEMPRE DE FORMA AUTOMATICA, AUNQUE LA POLIZA TENGA PRIMAS MANUALES';
+comment on column G2000170.cod_eco
+  is 'CONCEPTO ECONOMICO A QUE APLICA EL CONCEPTODE DESGLOSE';
+comment on column G2000170.mca_deposita_calculo_c0
+  is 'SI SE ACUMULA O NO EN EL BLOQUE 0 A NIVEL DE COBERTURA';
+comment on column G2000170.mca_deposita_calculo_c1
+  is 'SI SE ACUMULA O NO EN EL BLOQUE 1 A NIVEL DE COBERTURA';
+comment on column G2000170.mca_deposita_calculo_c2
+  is 'SI SE ACUMULA O NO EN EL BLOQUE 2 A NIVEL DE COBERTURA';
+comment on column G2000170.mca_deposita_calculo_c3
+  is 'SI SE ACUMULA O NO EN EL BLOQUE 3 A NIVEL DE COBERTURA';
+comment on column G2000170.mca_deposita_calculo_c4
+  is 'SI SE ACUMULA O NO EN EL BLOQUE 4 A NIVEL DE COBERTURA';
+comment on column G2000170.mca_deposita_calculo_c5
+  is 'SI SE ACUMULA O NO EN EL BLOQUE 5 A NIVEL DE COBERTURA';
+comment on column G2000170.mca_deposita_calculo_c6
+  is 'SI SE ACUMULA O NO EN EL BLOQUE 6 A NIVEL DE COBERTURA';
+comment on column G2000170.mca_deposita_calculo_c7
+  is 'SI SE ACUMULA O NO EN EL BLOQUE 7 A NIVEL DE COBERTURA';
+comment on column G2000170.mca_deposita_calculo_c8
+  is 'SI SE ACUMULA O NO EN EL BLOQUE 8 A NIVEL DE COBERTURA';
+comment on column G2000170.mca_deposita_calculo_c9
+  is 'SI SE ACUMULA O NO EN EL BLOQUE 9 A NIVEL DE COBERTURA';
+comment on column G2000170.mca_deposita_calculo_r0
+  is 'SI SE ACUMULA O NO EN EL BLOQUE 0 A NIVEL DE RIESGO';
+comment on column G2000170.mca_deposita_calculo_r1
+  is 'SI SE ACUMULA O NO EN EL BLOQUE 1 A NIVEL DE RIESGO';
+comment on column G2000170.mca_deposita_calculo_r2
+  is 'SI SE ACUMULA O NO EN EL BLOQUE 2 A NIVEL DE RIESGO';
+comment on column G2000170.mca_deposita_calculo_r3
+  is 'SI SE ACUMULA O NO EN EL BLOQUE 3 A NIVEL DE RIESGO';
+comment on column G2000170.mca_deposita_calculo_r4
+  is 'SI SE ACUMULA O NO EN EL BLOQUE 4 A NIVEL DE RIESGO';
+comment on column G2000170.mca_deposita_calculo_p0
+  is 'SI SE ACUMULA O NO EN EL BLOQUE 0 A NIVEL DE POLIZA';
+comment on column G2000170.mca_deposita_calculo_p1
+  is 'SI SE ACUMULA O NO EN EL BLOQUE 1 A NIVEL DE POLIZA';
+comment on column G2000170.mca_deposita_calculo_p2
+  is 'SI SE ACUMULA O NO EN EL BLOQUE 2 A NIVEL DE POLIZA';
+comment on column G2000170.mca_deposita_calculo_p3
+  is 'SI SE ACUMULA O NO EN EL BLOQUE 3 A NIVEL DE POLIZA';
+comment on column G2000170.mca_deposita_calculo_p4
+  is 'SI SE ACUMULA O NO EN EL BLOQUE 4 A NIVEL DE POLIZA';
+comment on column G2000170.mca_deposita_calculo_t0
+  is 'SI SE ACUMULA O NO EN EL BLOQUE 0 A NIVEL TOTAL DE POLIZA';
+comment on column G2000170.mca_deposita_calculo_t1
+  is 'SI SE ACUMULA O NO EN EL BLOQUE 1 A NIVEL TOTAL DE POLIZA';
+comment on column G2000170.mca_deposita_calculo_t2
+  is 'SI SE ACUMULA O NO EN EL BLOQUE 2 A NIVEL TOTAL DE POLIZA';
+comment on column G2000170.mca_deposita_calculo_t3
+  is 'SI SE ACUMULA O NO EN EL BLOQUE 3 A NIVEL TOTAL DE POLIZA';
+comment on column G2000170.mca_deposita_calculo_t4
+  is 'SI SE ACUMULA O NO EN EL BLOQUE 4 A NIVEL TOTAL DE POLIZA';
+comment on column G2000170.cod_usr
+  is 'CODIGO DE USUARIO QUE HACE LA DEFINICION';
+comment on column G2000170.fec_actu
+  is 'FECHA DE ULTIMA ACTUALIZACION DE LA DEFINICION';
+comment on column G2000170.fec_validez
+  is 'FECHA DE VALIDEZ';
+comment on column G2000170.nom_prg_no_consumido
+  is 'PROCEDIMIENTO DE CALCULO DE IMPORTE NO CONSUMIDO';
+-- Create/Recreate primary, unique and foreign key constraints 
+alter table G2000170
+  add constraint PK_G2000170 primary key (COD_CIA, COD_DESGLOSE, FEC_VALIDEZ)
+  using index 
+  tablespace INDICES
+  pctfree 10
+  initrans 2
+  maxtrans 255
+  storage
+  (
+    initial 128K
+    next 1M
+    minextents 1
+    maxextents unlimited
+  );
+-- Create/Recreate check constraints 
+alter table G2000170
+  add constraint CK_TIP_AMBITO_G2000170
+  check (TIP_AMBITO IN ('1','2','3'));
+alter table G2000170
+  add constraint CK_TIP_BASE_CALCULO_G2000170
+  check (TIP_BASE_CALCULO IN (               'CA','PR',               'C0','C1','C2','C3','C4','C5','C6','C6','C8','C9',               'R0','R1','R2','R3','R4',               'P0','P1','P2','P3','P4',               'T0','T1','T2','T3','T4'               ));
+alter table G2000170
+  add constraint CK_TIP_CALCULO_G2000170
+  check (TIP_CALCULO IN ('1','2','3','4','5' ));
+
+  -- Create table
+create table G2000180
+(
+  cod_cia            NUMBER(2) not null,
+  cod_ramo           NUMBER(3) not null,
+  cod_modalidad      NUMBER(5) not null,
+  cod_cob            NUMBER(4) not null,
+  num_secu           NUMBER(2) not null,
+  cod_desglose       NUMBER(3) not null,
+  num_bloque_estudio NUMBER(2),
+  tip_aplicacion     VARCHAR2(1) not null,
+  fec_validez        DATE not null,
+  cod_usr            VARCHAR2(8) not null,
+  fec_actu           DATE not null
+)
+tablespace DATOS
+  pctfree 10
+  initrans 1
+  maxtrans 255
+  storage
+  (
+    initial 1152K
+    next 1M
+    minextents 1
+    maxextents unlimited
+  );
+-- Add comments to the table 
+comment on table G2000180
+  is 'CONCEPTOS DE DESGLOSE POR RAMO/COBERTURA';
+-- Add comments to the columns 
+comment on column G2000180.cod_cia
+  is 'CODIGO DE COMPA?IA';
+comment on column G2000180.cod_ramo
+  is 'CODIGO DEL RAMO';
+comment on column G2000180.cod_modalidad
+  is 'CODIGO DE LA MODALIDAD';
+comment on column G2000180.cod_cob
+  is 'CODIGO DE COBERTURA';
+comment on column G2000180.num_secu
+  is 'ORDEN EN EL QUE SE CALCULARA EL CONCEPTO';
+comment on column G2000180.cod_desglose
+  is 'CODIGO DE CONCEPTO DE DESGLOSE ';
+comment on column G2000180.num_bloque_estudio
+  is 'NUMERO DE BLOQUE PARA ESTUDIO';
+comment on column G2000180.tip_aplicacion
+  is 'CALCULO UTILIZADO : (G)GENERAL, (R)RAMO,(C)COBERTURA.';
+comment on column G2000180.fec_validez
+  is 'FECHA DE VALIDEZ';
+comment on column G2000180.cod_usr
+  is 'CODIGO DE USUARIO QUE ACTUALIZO ';
+comment on column G2000180.fec_actu
+  is 'FECHA DE ULTIMA ACTUALIZACION ';
+-- Create/Recreate primary, unique and foreign key constraints 
+alter table G2000180
+  add constraint PK_G2000180 primary key (COD_CIA, COD_RAMO, COD_MODALIDAD, COD_COB, COD_DESGLOSE, FEC_VALIDEZ)
+  using index 
+  tablespace INDICES
+  pctfree 10
+  initrans 2
+  maxtrans 255
+  storage
+  (
+    initial 384K
+    next 1M
+    minextents 1
+    maxextents unlimited
+  );
+
+  
+  -- Create table
+create table G2000010
+(
+  cod_cia             NUMBER(2) not null,
+  cod_campo           VARCHAR2(30) not null,
+  cod_modulo          VARCHAR2(3),
+  cod_texto           NUMBER(5),
+  nom_campo           VARCHAR2(30) not null,
+  tip_campo           VARCHAR2(1) not null,
+  lng_campo           NUMBER(4) not null,
+  cod_sistema         VARCHAR2(1) not null,
+  mca_inh             VARCHAR2(1) not null,
+  mca_sini            VARCHAR2(1) not null,
+  mca_obligatorio     VARCHAR2(1) not null,
+  mca_validacion      VARCHAR2(1) not null,
+  nom_prg_pre_campo   VARCHAR2(61),
+  nom_prg_campo       VARCHAR2(61),
+  val_defecto         VARCHAR2(2000),
+  nom_pgm_help        VARCHAR2(12),
+  cod_version         NUMBER(2),
+  nom_global_pgm_help VARCHAR2(35),
+  nom_tabla_valida    VARCHAR2(30),
+  cod_usr             VARCHAR2(8) not null,
+  fec_actu            DATE not null
+)
+tablespace DATOS
+  pctfree 10
+  initrans 1
+  maxtrans 255
+  storage
+  (
+    initial 768K
+    next 1M
+    minextents 1
+    maxextents unlimited
+  );
+-- Add comments to the table 
+comment on table G2000010
+  is 'TABLA DE DATOS VARIABLES POR COMPANIA';
+-- Add comments to the columns 
+comment on column G2000010.cod_cia
+  is 'CODIGO DE COMPANIA ';
+comment on column G2000010.cod_campo
+  is 'CODIGO DE CAMPO. DATO VARIABLE ';
+comment on column G2000010.cod_modulo
+  is 'MODULO PARA ETIQUETAS';
+comment on column G2000010.cod_texto
+  is 'TEXTO DEL MODULO PARA ETIQUETAS';
+comment on column G2000010.nom_campo
+  is 'DESCRIPCION DEL DATO VARIABLE ';
+comment on column G2000010.tip_campo
+  is 'TIPO DEL DATO VARIABLE (NUMERICO/CARACTER/FECHA) ';
+comment on column G2000010.lng_campo
+  is 'LONGITUD DEL DATO VARIABLE ';
+comment on column G2000010.cod_sistema
+  is 'CODIGO DE SISTEMA ';
+comment on column G2000010.mca_inh
+  is 'MARCA DE BAJA DE DATO VARIABLE';
+comment on column G2000010.mca_sini
+  is 'MARCA QUE INDICA SI ESTE DATO VARIABLE DEBE SER MOSTRADO EN SINIESTROS COMO DATO DEL RIESGO';
+comment on column G2000010.mca_obligatorio
+  is 'ES OBLIGATORIO EL CAMPO';
+comment on column G2000010.mca_validacion
+  is 'TIENE VALIDACIONES EL CAMPO';
+comment on column G2000010.nom_prg_pre_campo
+  is 'PROCEDIMIENTO DE PRE-CAMPO ASOCIADO AL CAMPO';
+comment on column G2000010.nom_prg_campo
+  is 'PROCEDIMIENTO DE VALIDACION ASOCIADO AL DATO VARIABLE';
+comment on column G2000010.val_defecto
+  is 'VALOR POR DEFECTO DEL CAMPO ';
+comment on column G2000010.nom_pgm_help
+  is 'PROGRAMA DE AYUDA ';
+comment on column G2000010.cod_version
+  is 'VERSION DEL PROGRAMA DE AYUDA';
+comment on column G2000010.nom_global_pgm_help
+  is 'NOMBRE DE LA GLOBAL QUE TIENE EL VALOR DEL DATO VARIABLE';
+comment on column G2000010.nom_tabla_valida
+  is 'TABLA DE VALIDACION ';
+comment on column G2000010.cod_usr
+  is 'USUARIO QUE ACTUALIZA ';
+comment on column G2000010.fec_actu
+  is 'FECHA DE LA ULTIMA ACTUALIZACION DEL REGISTRO ';
+-- Create/Recreate primary, unique and foreign key constraints 
+alter table G2000010
+  add constraint PK_G2000010 primary key (COD_CIA, COD_CAMPO)
+  using index 
+  tablespace INDICES
+  pctfree 10
+  initrans 2
+  maxtrans 255
+  storage
+  (
+    initial 512K
+    next 1M
+    minextents 1
+    maxextents unlimited
+  );
+
+  
+  
+  -- Create table
+create table A2990200
+(
+  cod_cia     NUMBER(2) not null,
+  cod_lista   NUMBER(3) not null,
+  nom_lista   VARCHAR2(30) not null,
+  mca_calculo VARCHAR2(1) not null,
+  cod_usr     VARCHAR2(8) not null,
+  fec_actu    DATE not null
+)
+tablespace DATOS
+  pctfree 10
+  initrans 1
+  maxtrans 255
+  storage
+  (
+    initial 1152K
+    next 1M
+    minextents 1
+    maxextents unlimited
+  );
+-- Add comments to the table 
+comment on table A2990200
+  is 'DESCRIPCIONES DE LISTAS DE VALORES';
+-- Add comments to the columns 
+comment on column A2990200.cod_cia
+  is 'CODIGO DE COMPA?IA';
+comment on column A2990200.cod_lista
+  is 'CODIGO DE LISTA';
+comment on column A2990200.nom_lista
+  is 'DESCRIPCION DE LA LISTA';
+comment on column A2990200.mca_calculo
+  is 'SI CADA OCURRENCIA DE LA LISTA CALCULA PRIMA';
+comment on column A2990200.cod_usr
+  is 'USUARIO QUE ACTUALIZA';
+comment on column A2990200.fec_actu
+  is 'FECHA ULTIMA ACTUALIZACION';
+-- Create/Recreate primary, unique and foreign key constraints 
+alter table A2990200
+  add constraint PK_A2990200 primary key (COD_CIA, COD_LISTA)
+  using index 
+  tablespace INDICES
+  pctfree 10
+  initrans 2
+  maxtrans 255
+  storage
+  (
+    initial 128K
+    next 1M
+    minextents 1
+    maxextents unlimited
+  );
+
+  
+  
+  -- Create table
+create table A2990210
+(
+  cod_cia   NUMBER(2) not null,
+  cod_lista NUMBER(3) not null,
+  num_secu  NUMBER(4) not null,
+  cod_campo VARCHAR2(30) not null,
+  cod_usr   VARCHAR2(8) not null,
+  fec_actu  DATE not null
+)
+tablespace DATOS
+  pctfree 10
+  initrans 1
+  maxtrans 255
+  storage
+  (
+    initial 1152K
+    next 1M
+    minextents 1
+    maxextents unlimited
+  );
+-- Add comments to the table 
+comment on table A2990210
+  is 'DATOS VARIABLES ASOCIADOS A UNA LISTA';
+-- Add comments to the columns 
+comment on column A2990210.cod_cia
+  is 'CODIGO DE COMPA?IA';
+comment on column A2990210.cod_lista
+  is 'CODIGO DE LISTA';
+comment on column A2990210.num_secu
+  is 'NUMERO DE ORDEN';
+comment on column A2990210.cod_campo
+  is 'CODIGO DE CAMPO DE LA LISTA';
+comment on column A2990210.cod_usr
+  is 'USUARIO QUE ACTUALIZA';
+comment on column A2990210.fec_actu
+  is 'FECHA DE ULTIMA ACTUALIZACION';
+-- Create/Recreate primary, unique and foreign key constraints 
+alter table A2990210
+  add constraint PK_A2990210 primary key (COD_CIA, COD_LISTA, COD_CAMPO)
+  using index 
+  tablespace INDICES
+  pctfree 10
+  initrans 2
+  maxtrans 255
+  storage
+  (
+    initial 128K
+    next 1M
+    minextents 1
+    maxextents unlimited
+  );
+
+  
+  -- Create table
+create table G2990006
+(
+  cod_cia       NUMBER(2) not null,
+  cod_ramo      NUMBER(3) not null,
+  cod_modalidad NUMBER(5) not null,
+  fec_validez   DATE not null,
+  cod_campo     VARCHAR2(30) not null,
+  cod_valor     VARCHAR2(10) not null,
+  nom_valor     VARCHAR2(30),
+  num_pto       NUMBER(2),
+  fec_actu      DATE,
+  cod_usr       VARCHAR2(8)
+)
+tablespace DATOS
+  pctfree 10
+  initrans 1
+  maxtrans 255
+  storage
+  (
+    initial 128K
+    next 1M
+    minextents 1
+    maxextents unlimited
+  );
+-- Add comments to the table 
+comment on table G2990006
+  is 'TABLA DE LOS VALORES DE DATOS VARIABLES';
+-- Add comments to the columns 
+comment on column G2990006.cod_cia
+  is 'CODIGO DE COMPANIA';
+comment on column G2990006.cod_ramo
+  is 'CODIGO DEL RAMO';
+comment on column G2990006.cod_modalidad
+  is 'CODIGO DE LA MODALIDAD';
+comment on column G2990006.fec_validez
+  is 'FECHA DE VALIDEZ ';
+comment on column G2990006.cod_campo
+  is 'CODIGO DEL CAMPO';
+comment on column G2990006.cod_valor
+  is 'VALOR DEL CAMPO';
+comment on column G2990006.nom_valor
+  is 'DESCRIPCION DEL VALOR';
+comment on column G2990006.num_pto
+  is 'NUMERO DE PUNTOS PARA LA SELECCION DE RIESGOS (VIDA)';
+comment on column G2990006.fec_actu
+  is 'FECHA DE LA ULTIMA ACTUALIZACION DEL REGISTRO ';
+comment on column G2990006.cod_usr
+  is 'CODIGO USUARIO DE LA ULTIMA ACTUALIZACION DEL REGISTRO ';
+-- Create/Recreate primary, unique and foreign key constraints 
+alter table G2990006
+  add constraint PK_G2990006 primary key (COD_CIA, COD_RAMO, COD_MODALIDAD, FEC_VALIDEZ, COD_CAMPO, COD_VALOR)
+  using index 
+  tablespace INDICES
+  pctfree 10
+  initrans 2
+  maxtrans 255
+  storage
+  (
+    initial 128K
+    next 1M
+    minextents 1
+    maxextents unlimited
+  );
+
+  
+  -- Create table
+create table G2000020
+(
+  cod_cia                     NUMBER(2) not null,
+  cod_ramo                    NUMBER(3) not null,
+  cod_modalidad               NUMBER(5) not null,
+  cod_cob                     NUMBER(4) not null,
+  cod_agr                     NUMBER(3) not null,
+  fec_validez                 DATE not null,
+  tip_nivel                   NUMBER(1) not null,
+  num_secu                    NUMBER(4) not null,
+  cod_campo                   VARCHAR2(30) not null,
+  mca_inh                     VARCHAR2(1) not null,
+  mca_visible                 VARCHAR2(1) not null,
+  mca_obligatorio             VARCHAR2(1) not null,
+  mca_valida_si_null          VARCHAR2(1) not null,
+  mca_modalidad               VARCHAR2(1) not null,
+  mca_calculo                 VARCHAR2(1) not null,
+  mca_presupuesto             VARCHAR2(1) not null,
+  mca_sini                    VARCHAR2(1) not null,
+  mca_unico                   VARCHAR2(1) not null,
+  mca_inspec                  VARCHAR2(1) not null,
+  mca_busca_insp              VARCHAR2(1) not null,
+  mca_busca_por_igual_insp    VARCHAR2(1) not null,
+  mca_solicita_en_copia       VARCHAR2(1) not null,
+  mca_graba_rechazo           VARCHAR2(1) not null,
+  mca_suma_aseg               VARCHAR2(1) not null,
+  mca_validacion              VARCHAR2(1) not null,
+  mca_validacion_cia          VARCHAR2(1) not null,
+  cod_usr                     VARCHAR2(8) not null,
+  fec_actu                    DATE not null,
+  tip_regulariza              VARCHAR2(1),
+  tip_regulariza_esp          VARCHAR2(1),
+  pct_regulariza_esp          NUMBER,
+  cod_indice                  NUMBER(2),
+  nom_prg_regulariza_esp      VARCHAR2(61),
+  nom_prg_pre_campo           VARCHAR2(61),
+  val_defecto                 VARCHAR2(80),
+  nom_tabla_val_defecto       VARCHAR2(30),
+  nom_campo_tabla_val_defecto VARCHAR2(30),
+  nom_pgm_help                VARCHAR2(12),
+  nom_tabla_valida            VARCHAR2(30),
+  cod_version                 NUMBER(2),
+  nom_global_pgm_help         VARCHAR2(35),
+  nom_prg_campo               VARCHAR2(61),
+  cod_lista                   NUMBER(3),
+  cod_transportes             VARCHAR2(1),
+  num_secu_insp               NUMBER(4)
+)
+tablespace DATOS
+  pctfree 10
+  initrans 1
+  maxtrans 255
+  storage
+  (
+    initial 384K
+    next 1M
+    minextents 1
+    maxextents unlimited
+  );
+-- Add comments to the table 
+comment on table G2000020
+  is 'TABLA DE DATOS VARIABLE POR RAMO';
+-- Add comments to the columns 
+comment on column G2000020.cod_cia
+  is 'CODIGO DE COMPANIA ';
+comment on column G2000020.cod_ramo
+  is 'CODIGO DE RAMO ';
+comment on column G2000020.cod_modalidad
+  is 'CODIGO DE MODALIDAD';
+comment on column G2000020.cod_cob
+  is 'CODIGO DE COBERTURA ';
+comment on column G2000020.cod_agr
+  is 'CODIGO DE AGRAVANTE';
+comment on column G2000020.fec_validez
+  is 'FECHA DE VALIDEZ';
+comment on column G2000020.tip_nivel
+  is 'CODIGO DE NIVEL';
+comment on column G2000020.num_secu
+  is 'NUMERO DE SECUENCIA';
+comment on column G2000020.cod_campo
+  is 'CODIGO DE CAMPO';
+comment on column G2000020.mca_inh
+  is 'MARCA DE BAJA';
+comment on column G2000020.mca_visible
+  is 'SERA VISIBLE POR PANTALLA';
+comment on column G2000020.mca_obligatorio
+  is 'OBLIGATORIO';
+comment on column G2000020.mca_valida_si_null
+  is 'LANZA LA VALIDACION AUNQUE NO TENGA VALOR';
+comment on column G2000020.mca_modalidad
+  is 'FORMA MODALIDADES';
+comment on column G2000020.mca_calculo
+  is 'SU CONTENIDO AFECTA DE FORMA ECONOMICA AL RIESGO/POLIZA';
+comment on column G2000020.mca_presupuesto
+  is 'NECESARIO REQUERIR EN PRESUPUESTOS';
+comment on column G2000020.mca_sini
+  is 'INDICA SI ES VISIBLE EN SINIESTROS O NO';
+comment on column G2000020.mca_unico
+  is 'INDICA SI ES UNICO EN LA BASE DE DATOS';
+comment on column G2000020.mca_inspec
+  is 'SE UTILIZA EN EL "FORMULARIO" DE LA INSPECCION DEL RIESGO';
+comment on column G2000020.mca_busca_insp
+  is 'SE ASOCIA LA INSPECCION A UN RIESGO POR ESTE DATO VARIABLE';
+comment on column G2000020.mca_busca_por_igual_insp
+  is 'INDICA SI EN INSPECCIONES LA BUSQUEDA ES POR IGUAL O POR SOUNDEX';
+comment on column G2000020.mca_solicita_en_copia
+  is 'INDICA SI EL VALOR DEL DATO SE PEDIRA EN UN RIESGO COPIADO';
+comment on column G2000020.mca_graba_rechazo
+  is 'INDICA SI SE GRABARA EL DATO AL RECHAZAR LA POLIZA';
+comment on column G2000020.mca_suma_aseg
+  is 'INDICA SI EL DATO QUE SE ESTA DEFINIENDO ES UN CAPITAL';
+comment on column G2000020.mca_validacion
+  is 'EL CAMPO TIENE VALIDACIONES';
+comment on column G2000020.mca_validacion_cia
+  is 'INDICA SI EL DATO VARIABLE TIENE VALIDACION POR COMPA?IA';
+comment on column G2000020.cod_usr
+  is 'CODIGO USUARIO DE LA ULTIMA ACTUALIZACION DEL REGISTRO';
+comment on column G2000020.fec_actu
+  is 'FECHA DE LA ULTIMA ACTUALIZACION DEL REGISTRO';
+comment on column G2000020.tip_regulariza
+  is 'EN CASO DE SER CAPITAL, INDICA SI REGULARIZA O NO EN LA RENOVACION (1) NO REGULARIZADO (2) ESPECIAL (3)RIESGO';
+comment on column G2000020.tip_regulariza_esp
+  is 'INDICA LA FORMA EN QUE SE REGULARIZARA EL DATO (0) NO REGULARIZA (1) CAPITAL ACTUAL (2) CAPITAL INICIAL (3) IPC (4) OTRO INDICE (5) OBJETO';
+comment on column G2000020.pct_regulariza_esp
+  is 'EN CASO DE REGULARIZAR POR CAPITAL ACTUAL O POR CAPITAL INICIAL EN ESTE CAMPO SE INDICA EL PORCENTAJE DE REGULARIZACION';
+comment on column G2000020.cod_indice
+  is 'EN CASO DE REGULARIZAR POR IPC U OTRO INDICE EN ESTE CAMPO SE INDICA EL CODIGO DEL INDICE';
+comment on column G2000020.nom_prg_regulariza_esp
+  is 'EN CASO DE REGULARIZAR POR OBJETO EN ESTE CAMPO SE INDICA EL NOMBRE DEL OBJETO';
+comment on column G2000020.nom_prg_pre_campo
+  is 'PROCEDIMIENTO DE PRE CAMPO';
+comment on column G2000020.val_defecto
+  is 'VALOR POR DEFECTO';
+comment on column G2000020.nom_tabla_val_defecto
+  is 'TABLA DE VALIDACION POR DEFECTO';
+comment on column G2000020.nom_campo_tabla_val_defecto
+  is 'TABLA DE VALIDACION POR DEFECTO DEL CAMPO';
+comment on column G2000020.nom_pgm_help
+  is 'PROGRAMA DE AYUDA';
+comment on column G2000020.nom_tabla_valida
+  is 'TABLA DE VALIDACION';
+comment on column G2000020.cod_version
+  is 'VERSION DE LA LISTA DE VALORES';
+comment on column G2000020.nom_global_pgm_help
+  is 'NOMBRE DE LA GLOBAL DONDE SE ENCUENTRA EL VALOR QUE SE HA DE ASIGNAR AL DATO VARIABLE';
+comment on column G2000020.nom_prg_campo
+  is 'PROCEDIMIENTO DE VALIDACION';
+comment on column G2000020.cod_lista
+  is 'CODIGO DE LA LISTA DE VALORES';
+comment on column G2000020.cod_transportes
+  is 'INDICA PARA DATOS VARIABLES DE TRANSPORTES SI SE PEDIRAN EN LAS POLIZAS MARCO, APLICACIONES O AMBAS';
+comment on column G2000020.num_secu_insp
+  is 'SECUENCIA DE BUSQUEDA EN INSPECCIONES';
+-- Create/Recreate indexes 
+create index I_G2000020_CIA_RAMO_CODCAMPO on G2000020 (COD_CIA, COD_RAMO, COD_CAMPO)
+  tablespace DATOS
+  pctfree 10
+  initrans 2
+  maxtrans 255
+  storage
+  (
+    initial 64K
+    next 1M
+    minextents 1
+    maxextents unlimited
+  );
+-- Create/Recreate primary, unique and foreign key constraints 
+alter table G2000020
+  add constraint PK_G2000020 primary key (COD_CIA, COD_RAMO, COD_MODALIDAD, COD_COB, COD_AGR, TIP_NIVEL, COD_CAMPO, FEC_VALIDEZ)
+  using index 
+  tablespace INDICES
+  pctfree 10
+  initrans 2
+  maxtrans 255
+  storage
+  (
+    initial 384K
+    next 1M
+    minextents 1
+    maxextents unlimited
+  );
+-- Create/Recreate check constraints 
+alter table G2000020
+  add constraint CK_COD_TRANSPORTES_G2000020
+  check (cod_transportes  IN ('P','A','X'));
+alter table G2000020
+  add constraint CK_TIP_NIVEL_G2000020
+  check (tip_nivel IN (1,2,3,4,5 ));
+alter table G2000020
+  add constraint CK_TIP_REGULARIZA_ESP_G2000020
+  check (tip_regulariza_esp IN ('1','2','3','4','5' ));
+alter table G2000020
+  add constraint CK_TIP_REGULARIZA_G2000020
+  check (tip_regulariza IN ('1','2','3' ));
+
+  
+  -- Create table
+create table A1001752
+(
+  cod_cia        NUMBER(2) not null,
+  cod_cuadro_com NUMBER(3) not null,
+  nom_cuadro_com VARCHAR2(30) not null,
+  abr_cuadro_com VARCHAR2(5) not null,
+  cod_usr        VARCHAR2(8) not null,
+  fec_actu       DATE not null
+)
+tablespace DATOS
+  pctfree 10
+  initrans 1
+  maxtrans 255
+  storage
+  (
+    initial 128K
+    next 1M
+    minextents 1
+    maxextents unlimited
+  );
+-- Add comments to the table 
+comment on table A1001752
+  is 'TABLA DE DESCRIPCIONES DE CUADRO DE COMISION';
+-- Add comments to the columns 
+comment on column A1001752.cod_cia
+  is 'CODIGO DE LA COMPA?IA.';
+comment on column A1001752.cod_cuadro_com
+  is 'CODIGO DEL CUADRO DE COMISION';
+comment on column A1001752.nom_cuadro_com
+  is 'NOMBRE DEL CUADRO DE COMISION';
+comment on column A1001752.abr_cuadro_com
+  is 'ABREVIATURA DEL CUADRO DE COMISION';
+comment on column A1001752.cod_usr
+  is 'CODIGO DEL USUARIO DE LA ACTUALIZACION';
+comment on column A1001752.fec_actu
+  is 'FECHA DE LA ACTUALIZACION';
+-- Create/Recreate primary, unique and foreign key constraints 
+alter table A1001752
+  add constraint PK_A1001752 primary key (COD_CIA, COD_CUADRO_COM)
+  using index 
+  tablespace INDICES
+  pctfree 10
+  initrans 2
+  maxtrans 255
+  storage
+  (
+    initial 128K
+    next 1M
+    minextents 1
+    maxextents unlimited
+  );
+
+  
+  -- Create table
+create table A1001750
+(
+  cod_cia           NUMBER(2) not null,
+  cod_cuadro_com    NUMBER(3) not null,
+  cod_ramo          NUMBER(3) not null,
+  cod_cob           NUMBER(4) not null,
+  pct_agt_npr       NUMBER not null,
+  pct_agt_car       NUMBER not null,
+  pct_rapp_npr      NUMBER not null,
+  pct_rapp_car      NUMBER not null,
+  pct_ase_npr       NUMBER not null,
+  pct_ase_car       NUMBER not null,
+  fec_validez       DATE not null,
+  nom_prg           VARCHAR2(61),
+  nom_prg_anulacion VARCHAR2(61),
+  cod_usr           VARCHAR2(8) not null,
+  fec_actu          DATE not null,
+  mca_inh           VARCHAR2(1) not null
+)
+tablespace DATOS
+  pctfree 10
+  initrans 1
+  maxtrans 255
+  storage
+  (
+    initial 384K
+    next 1M
+    minextents 1
+    maxextents unlimited
+  );
+-- Add comments to the table 
+comment on table A1001750
+  is 'TABLA DE PORCENTAJES DE CUADROS DE COMISION';
+-- Add comments to the columns 
+comment on column A1001750.cod_cia
+  is 'CODIGO DE COMPANIA ';
+comment on column A1001750.cod_cuadro_com
+  is 'CUADRO DE COMISION ASIGNADO AL AGENTE ';
+comment on column A1001750.cod_ramo
+  is 'CODIGO DE RAMO ';
+comment on column A1001750.cod_cob
+  is 'CODIGO DE COBERTURA ';
+comment on column A1001750.pct_agt_npr
+  is 'PORCENTAJE DE NUEVA PRODUCCION ';
+comment on column A1001750.pct_agt_car
+  is 'PORCENTAJE DE CARTERA ';
+comment on column A1001750.pct_rapp_npr
+  is 'PORCENTAJE SOBRER EL RAPPEL DE NUEVA PRODUCCION';
+comment on column A1001750.pct_rapp_car
+  is 'PORCENTAJE SOBRE EL RAPPEL DE CARTERA ';
+comment on column A1001750.pct_ase_npr
+  is 'PORCENTAJE NUEVA PRODUCCION PARA ASESOR';
+comment on column A1001750.pct_ase_car
+  is 'PORCENTAJE CARTERA PARA ASESOR ';
+comment on column A1001750.fec_validez
+  is 'FECHA DE EFECTO DEL CUADRO PARA RAMO COBERTURA';
+comment on column A1001750.nom_prg
+  is 'NOMBRE DEL PROCEDIMIENTO PARA RECUPERAR LOS PORCENTAJES';
+comment on column A1001750.nom_prg_anulacion
+  is 'NOMBRE DEL PROCEDIMIENTO PARA RECUPERAR LOS PORCENTAJES, EN CASO DE PRIMA NEGATIVA';
+comment on column A1001750.cod_usr
+  is 'FECHA DE ULTIMA ACTUALIZACION ';
+comment on column A1001750.fec_actu
+  is 'CODIGO DE USUARIO QUE ACTUALIZA ';
+comment on column A1001750.mca_inh
+  is 'MARCA DE FILA INHABILITADA';
+-- Create/Recreate primary, unique and foreign key constraints 
+alter table A1001750
+  add constraint PK_A1001750 primary key (COD_CIA, COD_CUADRO_COM, COD_RAMO, COD_COB, FEC_VALIDEZ)
+  using index 
+  tablespace INDICES
+  pctfree 10
+  initrans 2
+  maxtrans 255
+  storage
+  (
+    initial 256K
+    next 1M
+    minextents 1
+    maxextents unlimited
+  );
+-- Create/Recreate check constraints 
+alter table A1001750
+  add constraint CK_MAC_INH_A1001750
+  check (mca_inh IN ('S','N'));
+
+  
+  -- Create table
+create table A1001751
+(
+  cod_cia           NUMBER(2) not null,
+  cod_ramo          NUMBER(3) not null,
+  cod_nivel1        NUMBER(2) not null,
+  cod_nivel2        NUMBER(3) not null,
+  cod_nivel3        NUMBER(4) not null,
+  cod_agt           NUMBER(5) not null,
+  num_poliza        VARCHAR2(13) not null,
+  cod_cob           NUMBER(4) not null,
+  cod_mon           NUMBER(2) not null,
+  fec_validez       DATE not null,
+  pct_agt_npr       NUMBER not null,
+  pct_agt_car       NUMBER not null,
+  pct_rapp_npr      NUMBER not null,
+  pct_rapp_car      NUMBER not null,
+  pct_ase_npr       NUMBER not null,
+  pct_ase_car       NUMBER not null,
+  nom_prg           VARCHAR2(61),
+  nom_prg_anulacion VARCHAR2(61),
+  obs_excepcion     VARCHAR2(60),
+  cod_usr           VARCHAR2(8) not null,
+  fec_actu          DATE not null,
+  mca_inh           VARCHAR2(1) not null
+)
+tablespace DATOS
+  pctfree 10
+  initrans 1
+  maxtrans 255
+  storage
+  (
+    initial 128K
+    next 1M
+    minextents 1
+    maxextents unlimited
+  );
+-- Add comments to the table 
+comment on table A1001751
+  is 'EXCEPCIONES DE COMISION DE VIDA';
+-- Add comments to the columns 
+comment on column A1001751.cod_cia
+  is 'CODIGO DE COMPA?IA';
+comment on column A1001751.cod_ramo
+  is 'CODIGO DE RAMO';
+comment on column A1001751.cod_nivel1
+  is 'CODIGO DE NIVEL1 ESTRUCTURA COMERCIAL';
+comment on column A1001751.cod_nivel2
+  is 'CODIGO DE NIVEL2 ESTRUCTURA COMERCIAL';
+comment on column A1001751.cod_nivel3
+  is 'CODIGO DE NIVEL3 ESTRUCTURA COMERCIAL';
+comment on column A1001751.cod_agt
+  is 'CODIGO DE AGENTE';
+comment on column A1001751.num_poliza
+  is 'NUMERO DE POLIZA';
+comment on column A1001751.cod_cob
+  is 'CODIGO DE COBERTURA';
+comment on column A1001751.cod_mon
+  is 'CODIGO DE MONEDA';
+comment on column A1001751.fec_validez
+  is 'FECHA DE EFECTO DEL CUADRO PARA RAMO COBERTURA';
+comment on column A1001751.pct_agt_npr
+  is 'PORCENTAJE DE NUEVA PRODUCCION ';
+comment on column A1001751.pct_agt_car
+  is 'PORCENTAJE DE CARTERA ';
+comment on column A1001751.pct_rapp_npr
+  is 'PORCENTAJE SOBRER EL RAPPEL DE NUEVA PRODUCCION';
+comment on column A1001751.pct_rapp_car
+  is 'PORCENTAJE SOBRE EL RAPPEL DE CARTERA ';
+comment on column A1001751.pct_ase_npr
+  is 'PORCENTAJE NUEVA PRODUCCION PARA ASESOR';
+comment on column A1001751.pct_ase_car
+  is 'PORCENTAJE CARTERA PARA ASESOR ';
+comment on column A1001751.nom_prg
+  is 'NOMBRE DEL PROCEDIMIENTO PARA RECUPERAR LOS PORCENTAJES';
+comment on column A1001751.nom_prg_anulacion
+  is 'NOMBRE DEL PROCEDIMIENTO PARA RECUPERAR LOS PORCENTAJES, EN CASO DE PRIMA NEGATIVA';
+comment on column A1001751.obs_excepcion
+  is 'TEXTO DE OBSERVACION';
+comment on column A1001751.cod_usr
+  is 'FECHA DE ULTIMA ACTUALIZACION ';
+comment on column A1001751.fec_actu
+  is 'CODIGO DE USUARIO QUE ACTUALIZA ';
+comment on column A1001751.mca_inh
+  is 'MARCA DE FILA INHABILITADA';
+-- Create/Recreate primary, unique and foreign key constraints 
+alter table A1001751
+  add constraint PK_A1001751 primary key (COD_CIA, COD_MON, COD_NIVEL1, COD_NIVEL2, COD_NIVEL3, NUM_POLIZA, COD_RAMO, COD_COB, COD_AGT, FEC_VALIDEZ)
+  using index 
+  tablespace INDICES
+  pctfree 10
+  initrans 2
+  maxtrans 255
+  storage
+  (
+    initial 128K
+    next 1M
+    minextents 1
+    maxextents unlimited
+  );
+
+  
+  -- Create table
+create table A2301751
+(
+  cod_cia           NUMBER(2) not null,
+  cod_ramo          NUMBER(3) not null,
+  cod_modalidad     NUMBER(5) not null,
+  cod_nivel1        NUMBER(2) not null,
+  cod_nivel2        NUMBER(3) not null,
+  cod_nivel3        NUMBER(4) not null,
+  cod_agt           NUMBER(5) not null,
+  num_poliza        VARCHAR2(13) not null,
+  cod_cob           NUMBER(4) not null,
+  cod_mon           NUMBER(2) not null,
+  pct_agt_1         NUMBER,
+  pct_agt_2         NUMBER,
+  pct_agt_3         NUMBER,
+  num_agt_anos_suc  NUMBER,
+  pct_agt_anos_suc  NUMBER,
+  pct_rapp_1        NUMBER,
+  pct_rapp_2        NUMBER,
+  pct_rapp_3        NUMBER,
+  num_rapp_anos_suc NUMBER,
+  pct_rapp_anos_suc NUMBER,
+  pct_ase_1         NUMBER,
+  pct_ase_2         NUMBER,
+  pct_ase_3         NUMBER,
+  pct_agt_4         NUMBER,
+  pct_rapp_4        NUMBER,
+  pct_ase_4         NUMBER,
+  num_ase_anos_suc  NUMBER,
+  pct_ase_anos_suc  NUMBER,
+  fec_validez       DATE not null,
+  nom_prg           VARCHAR2(61),
+  nom_prg_anulacion VARCHAR2(61),
+  obs_excepcion     VARCHAR2(60),
+  cod_usr           VARCHAR2(8),
+  fec_actu          DATE,
+  mca_inh           VARCHAR2(1)
+)
+tablespace DATOS
+  pctfree 10
+  initrans 1
+  maxtrans 255
+  storage
+  (
+    initial 128K
+    next 1M
+    minextents 1
+    maxextents unlimited
+  );
+-- Add comments to the table 
+comment on table A2301751
+  is 'EXCEPCIONES DE COMISION DE VIDA';
+-- Add comments to the columns 
+comment on column A2301751.cod_cia
+  is 'CODIGO DE COMPA?IA';
+comment on column A2301751.cod_ramo
+  is 'CODIGO DE RAMO';
+comment on column A2301751.cod_modalidad
+  is 'CODIGO DE MODALIDAD';
+comment on column A2301751.cod_nivel1
+  is 'CODIGO DE NIVEL1 ESTRUCTURA COMERCIAL';
+comment on column A2301751.cod_nivel2
+  is 'CODIGO DE NIVEL2 ESTRUCTURA COMERCIAL';
+comment on column A2301751.cod_nivel3
+  is 'CODIGO DE NIVEL3 ESTRUCTURA COMERCIAL';
+comment on column A2301751.cod_agt
+  is 'CODIGO DE AGENTE';
+comment on column A2301751.num_poliza
+  is 'NUMERO DE POLIZA';
+comment on column A2301751.cod_cob
+  is 'CODIGO DE COBERTURA';
+comment on column A2301751.cod_mon
+  is 'CODIGO DE MONEDA';
+comment on column A2301751.pct_agt_1
+  is 'PORCENTAJE DE PRIMER ANIO AGENTE PRINCIPAL';
+comment on column A2301751.pct_agt_2
+  is 'PORCENTAJE DE SEGUNDO ANIO AGENTE PRINCIPAL';
+comment on column A2301751.pct_agt_3
+  is 'PORCENTAJE DE TERCER ANIO AGENTE PRINCIPAL';
+comment on column A2301751.num_agt_anos_suc
+  is 'NUMERO DE ANIOS CON COMISION A PARTIR DEL TERCERO DEL AGENTE PRINCIPAL';
+comment on column A2301751.pct_agt_anos_suc
+  is 'PORCENTAJE DE ANIOS SUCESIVOS DEL AGENTE PRINCIPAL';
+comment on column A2301751.pct_rapp_1
+  is 'PORCENTAJE DE PRIMER ANIO ORGANIZADOR';
+comment on column A2301751.pct_rapp_2
+  is 'PORCENTAJE DE SEGUNDO ANIO ORGANIZADOR';
+comment on column A2301751.pct_rapp_3
+  is 'PORCENTAJE DE TERCER ANIO ORGANIZADOR';
+comment on column A2301751.num_rapp_anos_suc
+  is 'NUMERO DE ANIOS CON COMISION A PARTIR DEL TERCERO ORGANIZADOR';
+comment on column A2301751.pct_rapp_anos_suc
+  is 'PORCENTAJE DE ANIOS SUCESIVOS ORGANIZADOR';
+comment on column A2301751.pct_ase_1
+  is 'PORCENTAJE DE PRIMER ANIO ASESOR';
+comment on column A2301751.pct_ase_2
+  is 'PORCENTAJE DE SEGUNDO ANIO ASESOR';
+comment on column A2301751.pct_ase_3
+  is 'PORCENTAJE DE TERCER ANIO ASESOR';
+comment on column A2301751.pct_agt_4
+  is 'PORCENTAJE DE CUARTO ANIO AGENTE PRINCIPAL';
+comment on column A2301751.pct_rapp_4
+  is 'PORCENTAJE DE CUARTO ANIO ORGANIZADOR';
+comment on column A2301751.pct_ase_4
+  is 'PORCENTAJE DE CUARTO ANIO ASESOR';
+comment on column A2301751.num_ase_anos_suc
+  is 'NUMERO DE ANIOS CON COMISION A PARTIR DEL TERCERO ASESOR';
+comment on column A2301751.pct_ase_anos_suc
+  is 'PORCENTAJE DE ANIOS SUCESIVOS ORGANIZADOR ASESOR';
+comment on column A2301751.fec_validez
+  is 'FECHA DE VALIDEZ';
+comment on column A2301751.nom_prg
+  is 'NOMBRE DE PROCEDIMIENTO DE CALCULO';
+comment on column A2301751.nom_prg_anulacion
+  is 'NOMBRE DEL PROCEDIMIENTO PARA RECUPEAR LOS PORCENTAJES, EN CASO DE PRIMA NEGATIVA';
+comment on column A2301751.obs_excepcion
+  is 'TEXTO DE OBSERVACION';
+comment on column A2301751.cod_usr
+  is 'CODIGO DE USUARIO DE ACTUALIZACION';
+comment on column A2301751.fec_actu
+  is 'FECHA DE ULTIMA ACTUALIZACION';
+comment on column A2301751.mca_inh
+  is 'MARCA DE FILA INHABILITADA';
+-- Create/Recreate primary, unique and foreign key constraints 
+alter table A2301751
+  add constraint PK_A2301751 primary key (COD_CIA, COD_RAMO, COD_MODALIDAD, COD_NIVEL1, COD_NIVEL2, COD_NIVEL3, COD_AGT, NUM_POLIZA, COD_COB, COD_MON, FEC_VALIDEZ)
+  using index 
+  tablespace INDICES
+  pctfree 10
+  initrans 2
+  maxtrans 255
+  storage
+  (
+    initial 128K
+    next 1M
+    minextents 1
+    maxextents unlimited
+  );
+
+  
+  -- Create table
+create table A2991800
+(
+  cod_cia                       NUMBER(2) not null,
+  cod_spto                      NUMBER(3) not null,
+  sub_cod_spto                  NUMBER(2) not null,
+  tip_spto                      VARCHAR2(2) not null,
+  nom_spto                      VARCHAR2(30) not null,
+  mca_clausula                  VARCHAR2(1) not null,
+  mca_anexo                     VARCHAR2(1) not null,
+  mca_temporal                  VARCHAR2(1) not null,
+  mca_mod_vigencia              VARCHAR2(1) not null,
+  mca_prorrata                  VARCHAR2(1) not null,
+  nom_prg_coef_anulacion        VARCHAR2(61),
+  tip_anulacion_escala          VARCHAR2(1),
+  tip_ambito_spto               VARCHAR2(1) not null,
+  mca_cambio_num_poliza         VARCHAR2(1) not null,
+  nom_prg_mca_cambio_num_poliza VARCHAR2(61),
+  mca_reinspeccion              VARCHAR2(1) not null,
+  nom_prg_mca_reinspeccion      VARCHAR2(61),
+  mca_pregunta_si_devuelve      VARCHAR2(1) not null,
+  mca_valida_cambio_nivel3      VARCHAR2(1) not null,
+  tip_spto_re                   NUMBER(1),
+  mca_inh                       VARCHAR2(1) not null,
+  cod_usr                       VARCHAR2(8) not null,
+  fec_actu                      DATE not null,
+  mca_dv_poliza                 VARCHAR2(1) not null
+)
+tablespace DATOS
+  pctfree 10
+  initrans 1
+  maxtrans 255
+  storage
+  (
+    initial 128K
+    next 1M
+    minextents 1
+    maxextents unlimited
+  );
+-- Add comments to the table 
+comment on table A2991800
+  is 'TABLA DE CODIGOS Y SUBCODIGOS DE SUPLEMENTOS';
+-- Add comments to the columns 
+comment on column A2991800.cod_cia
+  is 'CODIGO DE COMPA?IA';
+comment on column A2991800.cod_spto
+  is 'CODIGO DEL SUPLEMENTOS ';
+comment on column A2991800.sub_cod_spto
+  is 'SUBCODIGO DE SUPLEMENTOS ';
+comment on column A2991800.tip_spto
+  is 'INDICA EL TIPO DE SUPLEMENTO ';
+comment on column A2991800.nom_spto
+  is 'NOMBRE DEL SUPLEMENTO ';
+comment on column A2991800.mca_clausula
+  is 'INDICA SI LLEVA CLAUSULAS ';
+comment on column A2991800.mca_anexo
+  is 'INDICA SI LLEVA O NO TEXTO ASOCIADO ';
+comment on column A2991800.mca_temporal
+  is 'INDICA SI EL SUPLEMENTO ES TEMPORAL ';
+comment on column A2991800.mca_mod_vigencia
+  is 'INDICA SI SE PERMITE MODIFICAR LA VIGENCIA DE LA POLIZA A TRAVES DEL SUPLEMENTO ';
+comment on column A2991800.mca_prorrata
+  is 'INDICA LA FORMA DE CALCULO PARA LOS SUPLEMENTOS TEMPORALES: PRORRATA TEMPORIS O ESCALA SEGUN TABLA';
+comment on column A2991800.nom_prg_coef_anulacion
+  is 'NOMBRE DEL PROCEDIMIENTO QUE CALCULA EL COEFICIENTE DE ANULACION';
+comment on column A2991800.tip_anulacion_escala
+  is 'TIPO DE ANULACION A ESCALA: 1- DIRECTO S/% 2-PROPORCIONAL S/% ANULACION 3-PROPORCIONAL S/% CONSTITUCION';
+comment on column A2991800.tip_ambito_spto
+  is 'UTILIZACION DEL SUPLEMENTO: 1- POLIZA 2- APLICACION 3- AMBAS';
+comment on column A2991800.mca_cambio_num_poliza
+  is 'INDICA SI CAMBIA EL NUMERO DE POLIZA EN LA RENOVACION';
+comment on column A2991800.nom_prg_mca_cambio_num_poliza
+  is 'PROCEDIMIENTO PARA RECUPERAR EL VALOR DEL CAMPO MCA_CAMBIO_NUM_POLIZA';
+comment on column A2991800.mca_reinspeccion
+  is 'INDICA SI EL SUPLEMENTO OBLIGA A REINSPECCIONAR EL RIESGO';
+comment on column A2991800.nom_prg_mca_reinspeccion
+  is 'PROCEDIMIENTO PARA DETERMINAR SI EL SUPLEMENTO DEBE OBLIGAR A REINSPECCIONAR EL RIESGO';
+comment on column A2991800.mca_pregunta_si_devuelve
+  is 'INDICA SI SE DEBE PREGUNTAR SI DEVUELVE LA TOTALIDAD DEL IMPORTE EN LIQUIDACIONES';
+comment on column A2991800.mca_valida_cambio_nivel3
+  is 'INDICA SI EN CAMBIOS DE AGENTE SE VALIDA QUE PERTENEZCAN A LA MISMA ESTRUCTURA COMERCIAL';
+comment on column A2991800.tip_spto_re
+  is 'TIPO DE SUPLEMENTO DE REHABILITACION: 1- STANDARD 2- EXTENDIENDO VIGENCIA';
+comment on column A2991800.mca_inh
+  is 'MARCA DE REGISTRO INHABILITADO';
+comment on column A2991800.cod_usr
+  is 'CODIGO DE USUARIO QUE ACTUALIZA';
+comment on column A2991800.fec_actu
+  is 'FECHA DE ULTIMA ACTUALIZACION';
+comment on column A2991800.mca_dv_poliza
+  is 'INDICA SI SE VAN A APEDIR DATOS VARIABLES A NIVEL DE POLIZA EN LOS SUPLEMENTOS, ESTA VARIABLE SOLO SE PEDIRA EN CASO DE SER: AT,RE,LT,ER,CV o CA';
+-- Create/Recreate primary, unique and foreign key constraints 
+alter table A2991800
+  add constraint PK_A2991800 primary key (COD_CIA, COD_SPTO, SUB_COD_SPTO, TIP_AMBITO_SPTO)
+  using index 
+  tablespace INDICES
+  pctfree 10
+  initrans 2
+  maxtrans 255
+  storage
+  (
+    initial 128K
+    next 1M
+    minextents 1
+    maxextents unlimited
+  );
+-- Create/Recreate check constraints 
+alter table A2991800
+  add constraint CK_TIP_SPTO_A2991800
+  check (tip_spto IN ( 'IN', 'AT', 'RE', 'CV', 'CA', 'RF', 'AS',                'AN', 'CN', 'RS', 'RD', 'RR', 'PR','RC','AE','ER','PG',      'RP','DS','LT','SA','AA','AX','RG','MV'));
+
+ 
+
+
+  
+  -- Create table
+create table A1001331
+(
+  cod_cia                NUMBER(2) not null,
+  tip_docum              VARCHAR2(3) not null,
+  cod_docum              VARCHAR2(20) not null,
+  cod_act_tercero        NUMBER(3),
+  tip_nacionalidad       VARCHAR2(1),
+  cod_nacionalidad       VARCHAR2(3),
+  tip_domicilio          NUMBER(3),
+  nom_domicilio1         VARCHAR2(40),
+  nom_domicilio2         VARCHAR2(40),
+  nom_domicilio3         VARCHAR2(40),
+  nom_localidad          VARCHAR2(30),
+  cod_pais               VARCHAR2(3),
+  cod_prov               NUMBER(5),
+  cod_postal             VARCHAR2(15),
+  num_apartado           VARCHAR2(15),
+  tlf_pais               VARCHAR2(3),
+  tlf_zona               VARCHAR2(5),
+  tlf_numero             VARCHAR2(10),
+  fax_numero             VARCHAR2(10),
+  email                  VARCHAR2(60),
+  tip_domicilio_com      NUMBER(3),
+  nom_domicilio1_com     VARCHAR2(40),
+  nom_domicilio2_com     VARCHAR2(40),
+  nom_domicilio3_com     VARCHAR2(40),
+  nom_localidad_com      VARCHAR2(30),
+  cod_pais_com           VARCHAR2(3),
+  cod_prov_com           NUMBER(5),
+  cod_postal_com         VARCHAR2(15),
+  tlf_pais_com           VARCHAR2(3),
+  tlf_zona_com           VARCHAR2(5),
+  tlf_numero_com         VARCHAR2(10),
+  fax_numero_com         VARCHAR2(10),
+  email_com              VARCHAR2(60),
+  txt_etiqueta1          VARCHAR2(55),
+  txt_etiqueta2          VARCHAR2(55),
+  txt_etiqueta3          VARCHAR2(55),
+  txt_etiqueta4          VARCHAR2(55),
+  txt_etiqueta5          VARCHAR2(55),
+  nom_contacto           VARCHAR2(60),
+  tip_cargo              NUMBER(2),
+  tip_act_economica      NUMBER(2),
+  cod_entidad            VARCHAR2(4),
+  cod_oficina            VARCHAR2(4),
+  cta_cte                VARCHAR2(30),
+  cta_dc                 VARCHAR2(2),
+  fec_nacimiento         DATE,
+  fec_carnet_con         DATE,
+  cod_ocupacion          NUMBER(9),
+  cod_est_civil          VARCHAR2(1),
+  cod_profesion          NUMBER(9),
+  mca_sexo               VARCHAR2(1),
+  cod_calidad            VARCHAR2(2),
+  cod_idioma             VARCHAR2(3),
+  obs_asegurado          VARCHAR2(60),
+  cod_grp_tercero        VARCHAR2(10),
+  txt_aux1               VARCHAR2(15),
+  txt_aux2               VARCHAR2(15),
+  txt_aux3               VARCHAR2(15),
+  txt_aux4               VARCHAR2(15),
+  txt_aux5               VARCHAR2(15),
+  txt_aux6               VARCHAR2(15),
+  txt_aux7               VARCHAR2(15),
+  txt_aux8               VARCHAR2(15),
+  txt_aux9               VARCHAR2(15),
+  cod_usr                VARCHAR2(8),
+  fec_actu               DATE,
+  tlf_movil              VARCHAR2(12),
+  num_busca              VARCHAR2(10),
+  tip_etiqueta           NUMBER(1),
+  cod_estado             NUMBER(2),
+  cod_estado_com         NUMBER(2),
+  txt_email              VARCHAR2(60),
+  num_apartado_com       VARCHAR2(15),
+  cod_pais_etiqueta      VARCHAR2(3),
+  cod_estado_etiqueta    NUMBER(2),
+  cod_prov_etiqueta      NUMBER(5),
+  cod_postal_etiqueta    VARCHAR2(10),
+  num_apartado_etiqueta  VARCHAR2(15),
+  cod_localidad          NUMBER(5),
+  tip_tarjeta            NUMBER(2),
+  cod_tarjeta            NUMBER(4),
+  num_tarjeta            VARCHAR2(20),
+  cod_localidad_com      NUMBER(5),
+  cod_localidad_etiqueta NUMBER(5),
+  nom_localidad_etiqueta VARCHAR2(30),
+  fec_vcto_tarjeta       DATE,
+  cod_compensacion       NUMBER(1)
+)
+tablespace DATOS
+  pctfree 10
+  initrans 1
+  maxtrans 255
+  storage
+  (
+    initial 101888K
+    next 1M
+    minextents 1
+    maxextents unlimited
+  );
+-- Add comments to the table 
+comment on table A1001331
+  is 'DATOS DE ASEGURADOS)';
+-- Add comments to the columns 
+comment on column A1001331.cod_cia
+  is 'CODIGO DE LA COMPA?IA ';
+comment on column A1001331.tip_docum
+  is 'CODIGO DE DOCUMENTOO';
+comment on column A1001331.cod_docum
+  is 'NUMERO DE DOCUMENTOO';
+comment on column A1001331.cod_act_tercero
+  is 'CODIGO ACTIVIDAD ';
+comment on column A1001331.tip_nacionalidad
+  is 'TIPO DE NACIONALIDAD';
+comment on column A1001331.cod_nacionalidad
+  is 'CODIGO DE NACIONALIDAD)';
+comment on column A1001331.tip_domicilio
+  is 'TIPO DE DOMICILIO)';
+comment on column A1001331.nom_domicilio1
+  is 'DOMICILIOO';
+comment on column A1001331.nom_domicilio2
+  is 'DOMICILIOO';
+comment on column A1001331.nom_domicilio3
+  is 'DOMICILIOO';
+comment on column A1001331.nom_localidad
+  is 'LOCALIDADO';
+comment on column A1001331.cod_pais
+  is 'CODIGO DE PAIS';
+comment on column A1001331.cod_prov
+  is 'CODIGO DE PROVINCIA ';
+comment on column A1001331.cod_postal
+  is 'CODIGO POSTALO';
+comment on column A1001331.num_apartado
+  is 'APARTADO POSTAL';
+comment on column A1001331.tlf_pais
+  is 'PREFIJO TELEFONICO DEL PAIS';
+comment on column A1001331.tlf_zona
+  is 'PREFIJO TELEFONICO DE LA ZONA';
+comment on column A1001331.tlf_numero
+  is 'NUMERO DE TELEFONOO';
+comment on column A1001331.fax_numero
+  is 'NUMERO DE FAX';
+comment on column A1001331.email
+  is 'DIRECCION DE CORREO ELECTRONICO';
+comment on column A1001331.tip_domicilio_com
+  is 'TIPO DE DOMICILIO';
+comment on column A1001331.nom_domicilio1_com
+  is 'DOMICILIO';
+comment on column A1001331.nom_domicilio2_com
+  is 'DOMICILIO';
+comment on column A1001331.nom_domicilio3_com
+  is 'DOMICILIO';
+comment on column A1001331.nom_localidad_com
+  is 'LOCALIDAD';
+comment on column A1001331.cod_pais_com
+  is 'CODIGO DE PAIS';
+comment on column A1001331.cod_prov_com
+  is 'CODIGO DE LA PROVINCIA';
+comment on column A1001331.cod_postal_com
+  is 'CODIGO POSTAL';
+comment on column A1001331.tlf_pais_com
+  is 'PREFIJO TELEFONICO DEL PAIS';
+comment on column A1001331.tlf_zona_com
+  is 'PREFIJO TELEFONICO DE LA ZONA';
+comment on column A1001331.tlf_numero_com
+  is 'NUMERO DE TELEFONO';
+comment on column A1001331.fax_numero_com
+  is 'NUMERO FAX';
+comment on column A1001331.email_com
+  is 'DIRECCION DE CORREO ELECTRONICO';
+comment on column A1001331.txt_etiqueta1
+  is '1? LINEA DE LA ETIQUETA';
+comment on column A1001331.txt_etiqueta2
+  is '2? LINEA DE LA ETIQUETA';
+comment on column A1001331.txt_etiqueta3
+  is '3? LINEA DE LA ETIQUETA';
+comment on column A1001331.txt_etiqueta4
+  is '4? LINEA DE LA ETIQUETA';
+comment on column A1001331.txt_etiqueta5
+  is '5? LINEA DE LA ETIQUETA';
+comment on column A1001331.nom_contacto
+  is 'NOMBRE DE CONTACTO PARA PERSONAS JURIDICAS';
+comment on column A1001331.tip_cargo
+  is 'CARGO DEL CONTACTO EN LA PERSONA JURIDICA';
+comment on column A1001331.tip_act_economica
+  is 'TIPO DE ACTIVIDAD ECONOMICA PARA PERSONAS JURIDICAS';
+comment on column A1001331.cod_entidad
+  is 'CODIGO DE ENTIDAD FINANCIERA';
+comment on column A1001331.cod_oficina
+  is 'CODIGO DE LA OFICINA BANCARIA ';
+comment on column A1001331.cta_cte
+  is 'CUENTA CORRIENTE ';
+comment on column A1001331.cta_dc
+  is 'DIGITO DE CONTROL ';
+comment on column A1001331.fec_nacimiento
+  is 'FECHA DE NACIMIENTO ';
+comment on column A1001331.fec_carnet_con
+  is 'FECHA DE CARNET DE CONDUCIR ';
+comment on column A1001331.cod_ocupacion
+  is 'OCUPACION (CARGO) DEL ASEGURADO EN SU TRABAJO';
+comment on column A1001331.cod_est_civil
+  is 'ESTADO CIVIL ';
+comment on column A1001331.cod_profesion
+  is 'PROFESION ';
+comment on column A1001331.mca_sexo
+  is 'SEXO ';
+comment on column A1001331.cod_calidad
+  is 'CODIGO DE CALIDAD ';
+comment on column A1001331.cod_idioma
+  is 'CODIGO DE IDIOMA';
+comment on column A1001331.obs_asegurado
+  is 'OBSERVACIONES ';
+comment on column A1001331.cod_grp_tercero
+  is 'CODIGO AGRUPAMIENTO ';
+comment on column A1001331.txt_aux1
+  is 'CAMPO AUXILIAR';
+comment on column A1001331.txt_aux2
+  is 'CAMPO AUXILIAR';
+comment on column A1001331.txt_aux3
+  is 'CAMPO AUXILIAR';
+comment on column A1001331.txt_aux4
+  is 'CAMPO AUXILIAR';
+comment on column A1001331.txt_aux5
+  is 'CAMPO AUXILIAR';
+comment on column A1001331.txt_aux6
+  is 'CAMPO AUXILIAR';
+comment on column A1001331.txt_aux7
+  is 'CAMPO AUXILIAR';
+comment on column A1001331.txt_aux8
+  is 'CAMPO AUXILIAR';
+comment on column A1001331.txt_aux9
+  is 'CAMPO AUXILIAR';
+comment on column A1001331.cod_usr
+  is 'CODIGO DE USUARIO QUE ACTUALIZA';
+comment on column A1001331.fec_actu
+  is 'FECHA DE ACTUALIZACION ';
+comment on column A1001331.tlf_movil
+  is 'TELEFONO MOVIL';
+comment on column A1001331.num_busca
+  is 'NUMERO DEL BUSCA';
+comment on column A1001331.tip_etiqueta
+  is 'TIPO DE ETIQUETA';
+comment on column A1001331.cod_estado
+  is 'CODIGO DE ESTADO/COMUNIDAD AUTONOMA';
+comment on column A1001331.cod_estado_com
+  is 'CODIGO DE ESTADO/COMUNIDAD AUTONOMA ';
+comment on column A1001331.txt_email
+  is 'DIRECCION DE CORREO ELECTRONICO ';
+comment on column A1001331.num_apartado_com
+  is 'APARTADO POSTAL ';
+comment on column A1001331.cod_pais_etiqueta
+  is 'CODIGO DE PAIS ';
+comment on column A1001331.cod_estado_etiqueta
+  is 'CODIGO DE ESTADO/COMUNIDAD AUTONOMA ';
+comment on column A1001331.cod_prov_etiqueta
+  is 'CODIGO DE PROVINCIA ';
+comment on column A1001331.cod_postal_etiqueta
+  is 'CODIGO POSTAL ';
+comment on column A1001331.num_apartado_etiqueta
+  is 'APARTADO POSTAL ';
+comment on column A1001331.cod_localidad
+  is 'CODIGO DE LOCALIDAD ';
+comment on column A1001331.tip_tarjeta
+  is 'TIPO DE TARJETA CREDITO/DEBITO ';
+comment on column A1001331.cod_tarjeta
+  is 'CODIGO DE LA TARJETA ';
+comment on column A1001331.num_tarjeta
+  is 'NUMERO DE TARJETA ';
+comment on column A1001331.cod_localidad_com
+  is 'CODIGO DE LOCALIDAD ';
+comment on column A1001331.cod_localidad_etiqueta
+  is 'CODIGO DE LOCALIDAD ';
+comment on column A1001331.nom_localidad_etiqueta
+  is 'NOMBRE DE LA LOCALIDAD ';
+comment on column A1001331.fec_vcto_tarjeta
+  is 'FECHA DE VENCIMIENTO DE LA TARJETA ';
+comment on column A1001331.cod_compensacion
+  is 'CODIGO DE COMPENSACION ';
+-- Create/Recreate indexes 
+create index I_A1001331_COD_LOCALIDAD on A1001331 (COD_LOCALIDAD)
+  tablespace INDICES
+  pctfree 10
+  initrans 2
+  maxtrans 255
+  storage
+  (
+    initial 8064K
+    next 1M
+    minextents 1
+    maxextents unlimited
+  );
+-- Create/Recreate primary, unique and foreign key constraints 
+alter table A1001331
+  add constraint PK_A1001331 primary key (COD_CIA, TIP_DOCUM, COD_DOCUM)
+  using index 
+  tablespace INDICES
+  pctfree 10
+  initrans 2
+  maxtrans 255
+  storage
+  (
+    initial 9600K
+    next 1M
+    minextents 1
+    maxextents unlimited
+  );
+
+  -- Create table
+create table A1001300
+(
+  cod_cia                NUMBER(2) not null,
+  tip_docum              VARCHAR2(3) not null,
+  cod_docum              VARCHAR2(20) not null,
+  cod_act_tercero        NUMBER(3) not null,
+  cod_tercero            NUMBER(5),
+  tip_domicilio          NUMBER(3),
+  nom_domicilio1         VARCHAR2(40),
+  nom_domicilio2         VARCHAR2(40),
+  nom_domicilio3         VARCHAR2(40),
+  nom_localidad          VARCHAR2(30),
+  cod_pais               VARCHAR2(3),
+  cod_prov               NUMBER(5),
+  cod_estado             NUMBER(2),
+  cod_postal             VARCHAR2(15),
+  num_apartado           VARCHAR2(15),
+  tlf_pais               VARCHAR2(3),
+  tlf_zona               VARCHAR2(5),
+  tlf_numero             VARCHAR2(10),
+  fax_numero             VARCHAR2(10),
+  email                  VARCHAR2(60),
+  tlf_pais_com           VARCHAR2(3),
+  tlf_zona_com           VARCHAR2(5),
+  tlf_numero_com         VARCHAR2(10),
+  fax_numero_com         VARCHAR2(10),
+  email_com              VARCHAR2(60),
+  txt_etiqueta1          VARCHAR2(55),
+  txt_etiqueta2          VARCHAR2(55),
+  txt_etiqueta3          VARCHAR2(55),
+  txt_etiqueta4          VARCHAR2(55),
+  txt_etiqueta5          VARCHAR2(55),
+  txt_email              VARCHAR2(60),
+  cod_pais_etiqueta      VARCHAR2(3),
+  cod_estado_etiqueta    NUMBER(2),
+  cod_prov_etiqueta      NUMBER(5),
+  cod_postal_etiqueta    VARCHAR2(10),
+  num_apartado_etiqueta  VARCHAR2(15),
+  nom_contacto           VARCHAR2(60),
+  tip_cargo              NUMBER(2),
+  tip_act_economica      NUMBER(2),
+  cod_nivel3             NUMBER(4),
+  mca_sexo               VARCHAR2(1),
+  fec_nacimiento         DATE,
+  cod_est_civil          VARCHAR2(1),
+  cod_profesion          NUMBER(9),
+  cod_calidad            VARCHAR2(2),
+  cod_compensacion       NUMBER(1),
+  cod_reten              VARCHAR2(3),
+  cod_entidad            VARCHAR2(4),
+  cod_oficina            VARCHAR2(4),
+  cta_cte                VARCHAR2(30),
+  cta_dc                 VARCHAR2(2),
+  cod_grp_tercero        VARCHAR2(10),
+  cod_idioma             VARCHAR2(3),
+  obs_tercero            VARCHAR2(60),
+  txt_aux1               VARCHAR2(15),
+  txt_aux2               VARCHAR2(15),
+  txt_aux3               VARCHAR2(15),
+  txt_aux4               VARCHAR2(15),
+  txt_aux5               VARCHAR2(15),
+  txt_aux6               VARCHAR2(55),
+  txt_aux7               VARCHAR2(55),
+  txt_aux8               VARCHAR2(55),
+  txt_aux9               VARCHAR2(15),
+  fec_validez            DATE not null,
+  mca_inh                VARCHAR2(1),
+  cod_usr                VARCHAR2(8) not null,
+  fec_actu               DATE not null,
+  cod_localidad          NUMBER(5),
+  tip_docum1             VARCHAR2(3),
+  cod_docum1             VARCHAR2(20),
+  num_cel                VARCHAR2(20),
+  cod_localidad_etiqueta NUMBER(5),
+  nom_localidad_etiqueta VARCHAR2(30)
+)
+tablespace DATOS
+  pctfree 10
+  initrans 1
+  maxtrans 255
+  storage
+  (
+    initial 63744K
+    next 1M
+    minextents 1
+    maxextents unlimited
+  );
+-- Add comments to the table 
+comment on table A1001300
+  is 'TABLA DE DATOS DE TERCEROS -COMUN-';
+-- Add comments to the columns 
+comment on column A1001300.cod_cia
+  is 'CODIGO DE LA COMPANIA ';
+comment on column A1001300.tip_docum
+  is 'TIPO DE DOCUMENTO DEL TERCERO';
+comment on column A1001300.cod_docum
+  is 'CODIGO DE DOCUMENTO DEL TERCERO';
+comment on column A1001300.cod_act_tercero
+  is 'CODIGO ACTIVIDAD DEL DAMNIFICADO';
+comment on column A1001300.cod_tercero
+  is 'CODIGO DE TERCERO EN CASO DE TENER CLAVE ALTERNA';
+comment on column A1001300.tip_domicilio
+  is 'TIPO DE DOMICILIO (CALLE, AV.,ETC)';
+comment on column A1001300.nom_domicilio1
+  is 'DOMICILIO HABITACIONAL DEL TERCERO';
+comment on column A1001300.nom_domicilio2
+  is 'DOMICILIO HABITACIONAL DEL TERCERO';
+comment on column A1001300.nom_domicilio3
+  is 'DOMICILIO HABITACIONAL DEL TERCERO';
+comment on column A1001300.nom_localidad
+  is 'LOCALIDAD DEL TERCERO';
+comment on column A1001300.cod_pais
+  is 'CODIGO DEL PAIS';
+comment on column A1001300.cod_prov
+  is 'CODIGO DE LA PROVINCIA ';
+comment on column A1001300.cod_estado
+  is 'CODIGO ESTADO. ESTRUCTURA UBICACIONES';
+comment on column A1001300.cod_postal
+  is 'CODIGO POSTAL DEL BENEFICIARIO ';
+comment on column A1001300.num_apartado
+  is 'NUMERO DE APARTADO POSTAL';
+comment on column A1001300.tlf_pais
+  is 'TELEFONO DEL TERCERO';
+comment on column A1001300.tlf_zona
+  is 'TELEFONO DEL TERCERO';
+comment on column A1001300.tlf_numero
+  is 'TELEFONO DEL TERCERO';
+comment on column A1001300.fax_numero
+  is 'FAX DEL TERCERO';
+comment on column A1001300.email
+  is 'CORREO ELECTRONICO';
+comment on column A1001300.tlf_pais_com
+  is 'TELEFONO COMERCIAL ';
+comment on column A1001300.tlf_zona_com
+  is 'TELEFONO COMERCIAL ';
+comment on column A1001300.tlf_numero_com
+  is 'TELEFONO COMERCIAL ';
+comment on column A1001300.fax_numero_com
+  is 'FAX COMERCIAL ';
+comment on column A1001300.email_com
+  is 'EMAIL COMERCIAL';
+comment on column A1001300.txt_etiqueta1
+  is 'LINEA 1 ETIQUETA DE DIRECCION PARA ENVIO DE CORRESPONDENCIA';
+comment on column A1001300.txt_etiqueta2
+  is 'LINEA 2 ETIQUETA DE DIRECCION PARA ENVIO DE CORRESPONDENCIA';
+comment on column A1001300.txt_etiqueta3
+  is 'LINEA 3 ETIQUETA DE DIRECCION PARA ENVIO DE CORRESPONDENCIA';
+comment on column A1001300.txt_etiqueta4
+  is 'LINEA 4 ETIQUETA DE DIRECCION PARA ENVIO DE CORRESPONDENCIA';
+comment on column A1001300.txt_etiqueta5
+  is 'LINEA 5 ETIQUETA DE DIRECCION PARA ENVIO DE CORRESPONDENCIA';
+comment on column A1001300.txt_email
+  is 'DIRECCION DE CORREO ELECTRONICO PARA LA ETIQUETA';
+comment on column A1001300.cod_pais_etiqueta
+  is 'CODIGO PAIS PARA LA ETIQUETA';
+comment on column A1001300.cod_estado_etiqueta
+  is 'CODIGO ESTADO PARA LA ETIQUETA';
+comment on column A1001300.cod_prov_etiqueta
+  is 'CODIGO PROVINCIA O MUNICIPIO PARA LA ETIQUETA';
+comment on column A1001300.cod_postal_etiqueta
+  is 'CODIGO POSTAL PARA LA ETIQUETA';
+comment on column A1001300.num_apartado_etiqueta
+  is 'APARTADO DE CORREOS PARA LA ETIQUETA';
+comment on column A1001300.nom_contacto
+  is 'NOMBRE DE CONTACTO PARA PERSONAS JURIDICAS';
+comment on column A1001300.tip_cargo
+  is 'CARGO DE LA PERSONA DE CONTACTO';
+comment on column A1001300.tip_act_economica
+  is 'ACTIVIDAD ECONOMICA PARA PERSONAS JURIDICAS';
+comment on column A1001300.cod_nivel3
+  is 'CODIGO DE NIVEL 3 DE LA ESTRUCTURA COMERCIAL ';
+comment on column A1001300.mca_sexo
+  is 'SEXO (0) MUJER , (1) HOMBRE';
+comment on column A1001300.fec_nacimiento
+  is 'FECHA DE NACIMIENTO DEL DAMNIFICADO ';
+comment on column A1001300.cod_est_civil
+  is 'ESTADO CIVIL ';
+comment on column A1001300.cod_profesion
+  is 'PROFESION ';
+comment on column A1001300.cod_calidad
+  is 'CODIGO DE CALIDAD ';
+comment on column A1001300.cod_compensacion
+  is 'CODIGO DE COMPENSACION ';
+comment on column A1001300.cod_reten
+  is 'CODIGO DE RETENCION DE IMPUESTOS';
+comment on column A1001300.cod_entidad
+  is 'CONSEJO SUPERIOR BANCARIO ';
+comment on column A1001300.cod_oficina
+  is 'CUENTA CORRIENTE ';
+comment on column A1001300.cta_cte
+  is 'CUENTA CORRIENTE ';
+comment on column A1001300.cta_dc
+  is 'DIGITO DE CONTROL ';
+comment on column A1001300.cod_grp_tercero
+  is 'CODIGO AGRUPAMIENTO DE TERCEROS';
+comment on column A1001300.cod_idioma
+  is 'CODIGO DE IDIOMA';
+comment on column A1001300.obs_tercero
+  is 'OBSERVACIONES ';
+comment on column A1001300.txt_aux1
+  is 'CAMPO AUXILIAR. UTILIZADO PARA INFORMACIaN SOBRE LA RETENCION DE TERCERO';
+comment on column A1001300.txt_aux2
+  is 'CAMPO AUXILIAR';
+comment on column A1001300.txt_aux3
+  is 'CAMPO AUXILIAR';
+comment on column A1001300.txt_aux4
+  is 'CAMPO AUXILIAR';
+comment on column A1001300.txt_aux5
+  is 'CAMPO AUXILIAR';
+comment on column A1001300.txt_aux6
+  is 'CAMPO AUXILIAR';
+comment on column A1001300.txt_aux7
+  is 'CAMPO AUXILIAR';
+comment on column A1001300.txt_aux8
+  is 'CAMPO AUXILIAR';
+comment on column A1001300.txt_aux9
+  is 'CAMPO AUXILIAR';
+comment on column A1001300.fec_validez
+  is 'FECHA DE VALIDEZ ';
+comment on column A1001300.mca_inh
+  is 'MARCA DE INHABILITACION DEL REGISTRO ';
+comment on column A1001300.cod_usr
+  is 'CODIGO DE USUARIO QUE ACTUALIZA ';
+comment on column A1001300.fec_actu
+  is 'FECHA DE ACTUALIZACION ';
+comment on column A1001300.cod_localidad
+  is 'CODIGO DE LOCALIDAD. ESTRUCTURA UBICACIONES';
+-- Create/Recreate indexes 
+create index I_A1001300_1 on A1001300 (COD_CIA, COD_ACT_TERCERO, COD_TERCERO, FEC_VALIDEZ)
+  tablespace INDICES
+  pctfree 10
+  initrans 2
+  maxtrans 255
+  storage
+  (
+    initial 25216K
+    next 1M
+    minextents 1
+    maxextents unlimited
+  );
+create index I_A1001300_2 on A1001300 (COD_CIA, TIP_DOCUM1, COD_DOCUM1, COD_ACT_TERCERO)
+  tablespace INDICES
+  pctfree 10
+  initrans 2
+  maxtrans 255
+  storage
+  (
+    initial 2520K
+    next 1M
+    minextents 1
+    maxextents unlimited
+  );
+-- Create/Recreate primary, unique and foreign key constraints 
+alter table A1001300
+  add constraint PK_A1001300 primary key (COD_CIA, TIP_DOCUM, COD_DOCUM, COD_ACT_TERCERO, FEC_VALIDEZ)
+  using index 
+  tablespace INDICES
+  pctfree 10
+  initrans 2
+  maxtrans 255
+  storage
+  (
+    initial 15104K
+    next 1M
+    minextents 1
+    maxextents unlimited
+  );
+
+  
+
+  
