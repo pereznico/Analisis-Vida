@@ -1,0 +1,98 @@
+Minuta 06-12-2017
+-----------------
+
+* Sección { 
+	Solo para clasificación. En un principio servirá a modo estadístico, agrupando productos.
+	
+	Valores posibles relevados de Mapfre:
+		VIDA OBLIGATORIO													
+		ACCIDENTES PERSONALES													
+		VIDA INDIVIDUAL													
+		VIDA COLECTIVO													
+		SEPELIO INDIVIDUAL													
+		SEPELIO COLECTIVO													
+		SALUD													
+		AGRUPADOS													
+
+}
+* Producto {
+	Similar al concepto de ramo de Mapfre. 
+	Cada producto pertenecerá a una sección específica.
+	Además de datos descriptivos como Código, descripción, nombre abreviado. Se podrá parametrizar otras configuraciones:
+		- ¿Requiere presupuesto?
+		- ¿Permite ajuste manual de prima? La prima por defecto es la suma de la prima obtenida en base a las coberturas definidas en el ramo
+		- ¿Permite la modificación de las comisiones de manera manual?
+		- Forma de distribución de comisiones
+		- Multiriesgo?
+		- La renovación genera un número de póliza nueva.
+}
+* Riesgo {
+	El riesgo existirá siempre. Casos en los que no sea con riesgo y este deba ser transparente para el usuario, se creará un riesgo ficticio
+	para respetar la estructura definida.
+	Las coberturas definidas para el producto, existirán a nivel de riesgo.
+}
+* Coberturas {
+	Las coberturas de crean de manera general para luego ser asociadas a un producto,
+	Pueden ser obligatorias u opcionales.
+	Calculan prima, en principio el cálculo se hará a través de procedimientos. Sin embargo, se podrían considerar porcentajes u otra forma predefinida.
+	Puede configurarse si la prima puede ser modificada o si es manual.
+	Puede definirse el importe, por lo general se utiliza una suma asegurada. Para su obtención automática se puede definir un procedimiento.
+	Parámetros: Orden (utilizado para la visualización/impresión)
+}
+* Clausulas {
+	Definidas a nivel de producto/cobertura.
+	Puede definirse si una clausula puede agregarse manualmente.
+	
+}
+* Conceptos Económicos {
+	Definido a nivel de producto.
+	Todos los elementos que componen el premio, es decir todo lo que tenga valor dentro de una póliza: prima, sellados, impuestos internos.
+	Se define ámbito: emisión, endoso
+	El premio es un concepto default, obtenido a partir de las coberturas.
+}
+* Comisiones {
+	Se define a nivel productor/organizador - Agente institorio/vendedor. 
+	Permite definir porcentaje/funciones de cálculo.
+	Calculo: durante la emisión o durante la facturación.
+	Excepciones: Se puede definir excepciones con fecha de vigencia, productor u otros parámetros a definir. Una Excepción determina nuevas
+	formas de cálculo.
+	Las comisiones/excepciones se asocian a un producto.
+}
+* Endoso {
+	Se creará un maestro de endosos.
+	Cada endoso tendrá asociado un tipo, el cual permitirá definir que lote de datos se puede modificar.
+	Se permitirá parametrizar si un endoso genera envíos a la SSN.
+	Los endosos se habilitarán deberán ser habilitados para los productos.
+	
+}
+* Revisar {
+	Revisar frente de pólizas impresas de vida para determinar si algún concepto quedó fuera.
+	Revisar durante la impresión de pólizas en Mapfre como se realiza la obtención de las cláusulas. Esto para ver como resuelve los distintos
+	niveles.
+	
+}
+* Comentarios surgidos de la revisión de pantallas {
+	Producto {
+		Visualizar CUIC, visualizar comisión.
+		¿Es necesario un estado provisorio, uno anulado (provisorio rechazado)?
+		No se cargará datos de beneficiarios. Este se conocerá durante la liquidación.
+		Incorporar checklist.
+		La nómina inicial no se cargará durante la emisión. Se mantiene como trabaja actualmente ART, donde se puede importar una póliza luego de 
+		generado el contrato.
+		A nivel de checklist, se habló de la posibilidad de agregar acciones automáticas al momento de completarlo.
+	} 
+	Facturación {
+		A lo que existe, se deberían incorporar si ya está cargada la nómina de la afip para saber si puede o no facturar el periodo.
+		Evaluar cambiar el concepto Facturación por Cuotas.
+		Envío a Logic, evaluar cambios necesarios para este esquema.
+		}
+	Siniestros {
+		Carga de beneficiarios de manera opcional.
+		Se debe mantener el concepto de agenda.
+		No existirá asociación de gestor automática. Esta info no se va a visualizar. En principio será el que carga el siniestro.
+		
+	}
+	Cobranza {
+		Va a haber un procesamiento y una pantalla de consulta de cobranzas.
+	}
+}
